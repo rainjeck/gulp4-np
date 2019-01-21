@@ -1,0 +1,39 @@
+- var IMGPATH = "assets/images/"
+
+include ../components/components.pug
+
+block vars
+
+doctype html
+html(lang="ru-RU")
+  head
+    meta(charset="utf-8")
+    meta(http-equiv='X-UA-Compatible', content="IE=edge")
+    meta(name="SKYPE_TOOLBAR" content="SKYPE_TOOLBAR_PARSER_COMPATIBLE")
+    meta(name="format-detection" content="telephone=no")
+    meta(name="viewport" content="width=device-width,initial-scale=1")
+
+    link(rel="stylesheet" type='text/css' href="assets/css/libs.min.css")
+    link(rel="stylesheet" type='text/css' href="assets/css/app.css")
+
+    meta(name="keywords" content="")
+    meta(name="description" content="")
+
+    title #{title}
+
+  body
+    <!--[if lte IE 9]>
+    p.browsehappy Вы используете #[strong устаревший] браузер. Пожалуйста #[a(href="http://browsehappy.com/", target="_blank") обновите ваш браузер] чтобы воспользоваться всем функционалом сайта.
+    <![endif]-->
+
+    .wrapper
+      block header
+      main.main
+        block content
+
+      block footer
+
+    block modals
+
+    script(src="assets/js/libs.min.js")
+    script(src="assets/js/app.js")

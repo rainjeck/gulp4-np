@@ -1,0 +1,38 @@
+textOverflow(_lines)
+  display -webkit-box
+  -webkit-line-clamp _lines
+  -webkit-box-orient vertical
+  text-overflow: ellipsis
+  overflow hidden
+
+rem(value)
+  unit(value / base-font-size, 'rem')
+
+
+transit(duration = 0.25s)
+  transition all duration linear
+
+hidden()
+  opacity 0
+  visibility hidden
+
+visible()
+  opacity 1
+  visibility visible
+
+pseudo()
+  content ''
+  display block
+  position absolute
+
+bg(position,size)
+  background-repeat no-repeat
+  background-position position
+  background-size size
+
+centered-img()
+  width: 100%
+  position: absolute
+  top: 50%
+  left: 50%
+  transform: translate(-50%, -50)

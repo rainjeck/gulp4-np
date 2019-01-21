@@ -1,0 +1,22 @@
+/*
+ -------- GRID ------------------------------------------------------
+*/
+
+.row
+  box-sizing: border-box
+  display: flex
+  flex: 0 1 100%
+  flex-direction: row
+  flex-wrap: wrap
+  list-style: none
+  margin: 0 -16px
+
+.col
+  box-sizing: border-box
+  flex: 0 0 100%
+  flex-direction: column
+  max-width: 100%
+  padding: 0 16px
+
+col(num, columns)
+  max-width floor( ((100% / columns)* num), 2 )

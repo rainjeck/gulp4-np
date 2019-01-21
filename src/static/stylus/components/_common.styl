@@ -1,0 +1,120 @@
+/*
+ -------- BASE ------------------------------------------------------
+*/
+
+*
+  box-sizing: border-box
+  margin: 0
+  padding: 0
+
+  &:before, &:after
+    box-sizing: border-box
+
+body, html
+  padding: 0
+  border: 0
+  width: 100%
+  overflow-x: hidden
+
+html
+  font-size: font-16
+
+
+body
+  font-family: font-arial
+  color: font-color
+  font-weight: normal
+  background-color: #fff
+  line-height: normal
+  display: flex
+  position relative
+
+.browsehappy
+  display: block
+  margin: 0
+  padding: 30px
+  text-align: center
+  background: color-error
+  color: #fff
+  font-size: 18px
+  line-height: 1.4
+
+  a,
+  a:hover
+    color: #fff
+    text-decoration: underline
+
+.container
+  width: 100%
+  max-width: 1152px
+  padding: 0 16px
+  margin: 0 auto
+
+/*
+ -------- FOOTER TO BOTTOM ------------------------------------------
+*/
+.wrapper
+  flex 1 1 auto
+  width 100%
+  min-height 100vh
+  display flex
+  flex-flow column nowrap
+
+.main
+  flex 1 1 auto
+  display flex
+  flex-direction column
+  position relative
+  z-index 2
+
+.header, .footer
+  flex-shrink 0
+
+
+
+/*
+ -------- UI ELEMENTS ---------------------------------------------------------
+*/
+
+a
+  text-decoration none
+  color inherit
+  transit()
+
+// a[href]:not([class])
+
+button, input
+  font-family inherit
+  display block
+  outline none
+  border 0
+  background-color rgba(255,255,255,0)
+  transit()
+
+button
+  cursor pointer
+
+/*
+ -------- HELPERS ----------
+*/
+
+.hide
+  display none
+
+/*
+ -------- iFRAME -----------
+*/
+
+.iframe-container
+  overflow: hidden
+  padding-top: 56.25%
+  position: relative
+  width 100%
+
+  iframe
+    border: 0
+    height: 100%
+    left: 0
+    position: absolute
+    top: 0
+    width: 100%
