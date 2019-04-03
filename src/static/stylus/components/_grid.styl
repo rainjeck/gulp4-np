@@ -1,5 +1,5 @@
 /*!
- -------- STYLES FOR SIMPLE GRID ------------------------------------------------------
+ -------- STYLES FOR SIMPLE GRID --------------------------
 */
 
 .row
@@ -20,3 +20,9 @@
 
 col(num, columns)
   max-width floor( ((100% / columns)* num), 2 )
+
+
+grid($columns, $prefix)
+  for $col in 1..$columns
+    .col{$prefix}-{$col}
+      max-width floor( ((100% / $columns) * $col), 6 )

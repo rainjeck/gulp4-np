@@ -4,6 +4,17 @@ var browserSync = require("browser-sync").create();
 var http = require("http");
 var st = require("st");
 
+var libscss = [
+  "node_modules/reset-css/reset.css",
+];
+
+var libsjs = [
+  "node_modules/svg4everybody/dist/svg4everybody.min.js",
+  "node_modules/jquery/dist/jquery.min.js",
+  "node_modules/jquery-form-validator/form-validator/jquery.form-validator.min.js",
+  "node_modules/jquery-form-validator/form-validator/lang/ru.js",
+];
+
 // Static server
 gulp.task("browserSync", function() {
   browserSync.init({
@@ -16,14 +27,10 @@ gulp.task("browserSync", function() {
 
 // Copy libs
 gulp.task("copylibs", function() {
+  var libs = libscss.concat(libsjs);
+
 	return gulp
-		.src([
-			"node_modules/normalize-css/normalize.css",
-			"node_modules/svg4everybody/dist/svg4everybody.min.js",
-			"node_modules/jquery/dist/jquery.min.js",
-			"node_modules/jquery-form-validator/form-validator/jquery.form-validator.min.js",
-			"node_modules/jquery-form-validator/form-validator/lang/ru.js"
-		], {base: "./node_modules/"})
+		.src(libs, {base: "./node_modules/"})
 		.pipe(gulp.dest("src/static/libs"))
 });
 
@@ -31,7 +38,7 @@ gulp.task("copylibs", function() {
 gulp.task("stylus", function() {
   return (
     gulp
-      .src(["src/static/stylus/main.styl"])
+      .src(["src/static/stylus/main.styl", "src/components/**/*.styl"])
       .pipe(plugin.sourcemaps.init())
       .pipe(
         plugin
@@ -56,7 +63,7 @@ gulp.task("stylus", function() {
 gulp.task("pug", function() {
   return gulp
     .src(["src/pages/*.pug", "!src/pages/_*.pug"])
-    .pipe(plugin.pug({ pretty: true }))
+    .pipe(plugin.pug({ pretty: true, basedir: 'src/' }))
     .on("error", plugin.notify.onError("*** PUG ***: <%= error.message %>"))
     .pipe(gulp.dest("dest"))
     // .pipe(browserSync.stream());
@@ -79,9 +86,7 @@ gulp.task("appjs", function() {
 gulp.task("libs", function() {
   // CSS libs
   var stream = gulp
-    .src([
-      "src/static/libs/normalize-css/normalize.css",
-    ])
+    .src(libscss)
     .pipe(plugin.sourcemaps.init())
     .pipe(plugin.csso())
     .pipe(plugin.concat("libs.min.css"))
@@ -92,12 +97,7 @@ gulp.task("libs", function() {
 
   // JS libs
   var stream = gulp
-    .src([
-      "src/static/libs/svg4everybody/dist/svg4everybody.min.js",
-      "src/static/libs/jquery/dist/jquery.min.js",
-      "src/static/libs/jquery-form-validator/form-validator/jquery.form-validator.min.js",
-      "src/static/libs/jquery-form-validator/form-validator/lang/ru.js"
-    ])
+    .src(libsjs)
     .pipe(plugin.concat("libs.min.js"))
     .pipe(gulp.dest("dest/assets/js"))
     // .pipe(browserSync.stream());

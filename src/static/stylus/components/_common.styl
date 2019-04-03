@@ -1,5 +1,5 @@
 /*!
- -------- BASE ------------------------------------------------------
+ -------- BASE --------------------------------------------
 */
 
 *
@@ -19,10 +19,9 @@ body, html
 html
   font-size: font-16
 
-
 body
-  font-family: font-arial
-  color: font-color
+  font-family: font
+  color: color
   font-weight: normal
   background-color: #fff
   line-height: normal
@@ -34,7 +33,7 @@ body
   margin: 0
   padding: 30px
   text-align: center
-  background: color-error
+  background: #e55454
   color: #fff
   font-size: 18px
   line-height: 1.4
@@ -62,8 +61,7 @@ body
 
 .main
   flex 1 1 auto
-  display flex
-  flex-direction column
+  min-height 1vh
   position relative
   z-index 2
 
@@ -77,22 +75,54 @@ body
 */
 
 a
+  font-size inherit
+  font-family inherit
   text-decoration none
   color inherit
   transit()
 
+strong
+  font-weight bold
+
 // a[href]:not([class])
 
-button, input
+button, input, select, textarea
   font-family inherit
+  font-size inherit
   display block
   outline none
+  line-height 1
   border 0
   background-color rgba(255,255,255,0)
   transit()
 
-button
+button,
+button[type="submit"],
+input[type="submit"]
   cursor pointer
+
+button[type='submit']:disabled,
+input[type='submit']:disabled
+  cursor not-allowed
+
+input[type="search"],
+input[type=number]
+  -webkit-appearance textfield
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button
+  -webkit-appearance none
+  margin 0
+
+textarea {
+  width: 100%;
+  resize: none;
+}
+fieldset {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
 
 /*!
  -------- HELPERS ----------
