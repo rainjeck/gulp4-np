@@ -38,7 +38,7 @@ gulp.task("copylibs", function() {
 gulp.task("stylus", function() {
   return (
     gulp
-      .src(["src/static/stylus/main.styl", "src/components/**/*.styl"])
+      .src(["src/static/stylus/main.styl"])
       .pipe(plugin.sourcemaps.init())
       .pipe(
         plugin
