@@ -2,7 +2,7 @@
  -------- STYLES FOR SIMPLE GRID --------------------------
 */
 
-.row
+.rw
   box-sizing: border-box
   display: flex
   flex: 0 1 100%
@@ -11,7 +11,7 @@
   list-style: none
   margin: 0 -16px
 
-.col
+.cl
   box-sizing: border-box
   flex: 0 0 100%
   flex-direction: column
@@ -24,5 +24,5 @@ col(num, columns)
 
 grid($columns, $prefix)
   for $col in 1..$columns
-    .col{$prefix}-{$col}
+    .cl{$prefix}-{$col}
       max-width floor( ((100% / $columns) * $col), 6 )

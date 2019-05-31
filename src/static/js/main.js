@@ -1,12 +1,28 @@
-(function() {
-	var modelshop = {
-		init: function() {
+class App {
+	constructor() {
+		svg4everybody();
 
-			svg4everybody();
+		console.log('init');
 
-			console.log('work');
-		},
-	};
+		const viewport = this.getViewport();
+	}
 
-	modelshop.init();
-}());
+	getViewport() {
+		return {h: window.innerHeight, w: window.innerWidth};
+	}
+}
+
+new App();
+
+// (function() {
+// 	var app = {
+// 		init: function() {
+
+// 			svg4everybody();
+
+// 			console.log('work');
+// 		},
+// 	};
+
+// 	app.init();
+// }());

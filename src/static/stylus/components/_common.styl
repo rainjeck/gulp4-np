@@ -26,7 +26,6 @@ body
   background-color: #fff
   line-height: normal
   display: flex
-  position relative
 
 .browsehappy
   display: block
@@ -49,6 +48,7 @@ body
   padding: 0 16px
   margin: 0 auto
 
+
 /*!
  -------- FOOTER TO BOTTOM ------------------------------------------
 */
@@ -62,8 +62,6 @@ body
 .main
   flex 1 1 auto
   min-height 1vh
-  position relative
-  z-index 2
 
 .header, .footer
   flex-shrink 0
@@ -81,7 +79,7 @@ a
   color inherit
   transit()
 
-strong
+strong, b
   font-weight bold
 
 // a[href]:not([class])
@@ -89,7 +87,9 @@ strong
 button, input, select, textarea
   font-family inherit
   font-size inherit
+  color inherit
   display block
+  width 100%
   outline none
   line-height 1
   border 0
@@ -114,22 +114,31 @@ input[type=number]::-webkit-outer-spin-button
   -webkit-appearance none
   margin 0
 
-textarea {
-  width: 100%;
-  resize: none;
-}
-fieldset {
-  border: none;
-  margin: 0;
-  padding: 0;
-}
+textarea
+  width 100%
+  resize none
 
-/*!
- -------- HELPERS ----------
-*/
+fieldset
+  border none
+  margin 0
+  padding 0
 
-.hide
-  display none
+.select
+  select
+    appearance none
+    &::-ms-expand
+      display none
+
+ul, ol
+  padding-left 1.2em
+
+  &.unstyled
+    list-style-type none
+    padding 0
+
+
+
+
 
 /*!
  -------- iFRAME -----------
