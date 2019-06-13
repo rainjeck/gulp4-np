@@ -1,0 +1,25 @@
+/*!
+ --- HELPERS ------------------------------------
+*/
+
+.hide {
+  display: none;
+}
+
+.nolaptop {
+  @include laptop {
+    display: none !important;
+  }
+}
+
+.notablet {
+  @include tablet {
+    display: none !important;
+  }
+}
+
+.nomobile {
+  @include mobile {
+    display: none !important;
+  }
+}

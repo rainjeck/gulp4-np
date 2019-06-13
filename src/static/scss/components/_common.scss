@@ -1,0 +1,190 @@
+/*!
+ --- BASE ---------------------------------------
+*/
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+
+  &:before,
+  &:after {
+    box-sizing: border-box;
+  }
+}
+
+body,
+html {
+  padding: 0;
+  border: 0;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+html {
+  font-size: $font-16;
+}
+
+body {
+  font-family: $font;
+  color: $color;
+  font-weight: normal;
+  background-color: #fff;
+  line-height: normal;
+  display: flex;
+}
+
+.browsehappy {
+  display: block;
+  margin: 0;
+  padding: 30px;
+  text-align: center;
+  background: #e55454;
+  color: #fff;
+  font-size: 18px;
+  line-height: 1.4;
+
+  a,
+  a:hover {
+    color: #fff;
+    text-decoration: underline;
+  }
+}
+
+.container {
+  width: 100%;
+  max-width: 1152px;
+  padding: 0 16px;
+  margin: 0 auto;
+}
+
+/*!
+ --- FOOTER TO BOTTOM ---------------------------
+*/
+.wrapper {
+  flex: 1 1 auto;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.main {
+  flex: 1 1 auto;
+  min-height: 1vh;
+}
+
+.header,
+.footer {
+  flex-shrink: 0;
+  @include lg {
+    height: 100px;
+  }
+}
+
+/*!
+ --- UI ELEMENTS --------------------------------
+*/
+
+a {
+  font-size: inherit;
+  font-family: inherit;
+  text-decoration: none;
+  color: inherit;
+  @include transit();
+}
+
+strong,
+b {
+  font-weight: bold;
+}
+
+// a[href]:not([class])
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  display: block;
+  width: 100%;
+  outline: none;
+  line-height: 1;
+  border: 0;
+  background-color: rgba(255, 255, 255, 0);
+  @include transit();
+}
+
+button,
+button[type="submit"],
+input[type="submit"] {
+  cursor: pointer;
+}
+
+button[type="submit"]:disabled,
+input[type="submit"]:disabled {
+  cursor: not-allowed;
+}
+
+input[type="search"],
+input[type="number"] {
+  -webkit-appearance: textfield;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+textarea {
+  width: 100%;
+  resize: none;
+}
+
+fieldset {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+.select {
+  select {
+    appearance: none;
+    &::-ms-expand {
+      display: none;
+    }
+  }
+}
+
+ul,
+ol {
+  padding-left: 1.2em;
+
+  &.unstyled {
+    list-style-type: none;
+    padding: 0;
+  }
+}
+
+/*!
+ --- iFRAME -------------------------------------
+*/
+
+.iframe-container {
+  overflow: hidden;
+  padding-top: 56.25%;
+  position: relative;
+  width: 100%;
+
+  iframe {
+    border: 0;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+}
