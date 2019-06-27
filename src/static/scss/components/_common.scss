@@ -22,7 +22,7 @@ html {
 }
 
 html {
-  font-size: $font-16;
+  font-size: $font16;
 }
 
 body {
@@ -159,32 +159,10 @@ fieldset {
   }
 }
 
-ul,
-ol {
+ul, ol {
   padding-left: 1.2em;
-
-  &.unstyled {
-    list-style-type: none;
-    padding: 0;
-  }
 }
 
-/*!
- --- iFRAME -------------------------------------
-*/
-
-.iframe-container {
-  overflow: hidden;
-  padding-top: 56.25%;
-  position: relative;
-  width: 100%;
-
-  iframe {
-    border: 0;
-    height: 100%;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 100%;
-  }
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
 }

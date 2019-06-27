@@ -1,4 +1,11 @@
 - var IMGPATH = "assets/images/";
+- var ICOPATH = "assets/icons/";
+
+mixin svg( iconName )
+  svg(class= attributes.class): use(xlink:href=IMGPATH + 'sprite.svg#' + iconName)
+
+mixin svg-color( iconName )
+  svg(class= attributes.class): use(xlink:href=IMGPATH + 'sprite-colored.svg#' + iconName)
 
 include components/header
 include components/footer
@@ -28,11 +35,21 @@ html(lang="ru-RU")
     <![endif]-->
 
     .wrapper
+
+      // HEADER
       block header
+      // // HEADER
+
+      // MAIN
       main.main
         block content
+      // // MAIN
 
+      // FOOTER
       block footer
+      // // FOOTER
+
+    // // .WRAPPER
 
     block modals
 

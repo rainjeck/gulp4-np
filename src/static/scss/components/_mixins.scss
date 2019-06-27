@@ -1,9 +1,15 @@
 @mixin textOverflow($lines) {
+  display: box;
+  display: -ms-box;
   display: -webkit-box;
-  -webkit-line-clamp: $lines;
-  -webkit-box-orient: vertical;
+  display: -moz-box;
   text-overflow: ellipsis;
   overflow: hidden;
+  -webkit-line-clamp: $lines;
+  box-orient: vertical;
+  -moz-box-orient: vertical;
+  -webkit-box-orient: vertical;
+  -ms-box-orient: vertical;
 }
 
 @mixin transit($duration: 0.25s) {
@@ -38,4 +44,10 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50);
+}
+
+@mixin resetlist() {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
 }

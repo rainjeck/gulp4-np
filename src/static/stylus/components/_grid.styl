@@ -2,6 +2,8 @@
  --- STYLES FOR SIMPLE GRID ---------------------
 */
 
+gridPadding = 15px
+
 .rw
   box-sizing: border-box
   display: flex
@@ -9,20 +11,33 @@
   flex-direction: row
   flex-wrap: wrap
   list-style: none
-  margin: 0 -16px
+  margin: 0 (-(gridPadding))
 
 .cl
   box-sizing: border-box
   flex: 0 0 100%
-  flex-direction: column
   max-width: 100%
-  padding: 0 16px
+  padding: 0 gridPadding
 
 col(num, columns)
   max-width floor( ((100% / columns)* num), 2 )
 
 
-grid($columns, $prefix)
+grid($columns, $prefix = '')
   for $col in 1..$columns
     .cl{$prefix}-{$col}
       max-width floor( ((100% / $columns) * $col), 6 )
+
+// grid(12)
+
+// @media lg
+//   grid(12, '-lg')
+
+// @media md
+//   grid(12, '-md')
+
+// @media sm
+//   grid(12, '-sm')
+
+// @media xs
+//   grid(12, '-xs')
