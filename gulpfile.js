@@ -1,20 +1,15 @@
 var gulp = require("gulp");
 var plugin = require("gulp-load-plugins")();
 var browserSync = require("browser-sync").create();
-var http = require("http");
-var st = require("st");
+var del = require("del");
 
 var destAssetsDir = "dest/assets";
 
 var css = "stylus"; // 'sass' or 'stylus'
 
-var libsCss = [
-  "node_modules/normalize.css/normalize.css"
-];
+var libsCss = ["node_modules/normalize.css/normalize.css"];
 
-var libsJs = [
-  "node_modules/svg4everybody/dist/svg4everybody.min.js"
-];
+var libsJs = ["node_modules/svg4everybody/dist/svg4everybody.min.js"];
 
 var localCss = [];
 var localJs = [];
@@ -23,8 +18,7 @@ var localJs = [];
 gulp.task("server", function() {
   browserSync.init({
     server: {
-      baseDir: "dest",
-      open: false
+      baseDir: "dest"
     }
   });
 });
@@ -32,43 +26,45 @@ gulp.task("server", function() {
 // CSS
 if (css == "stylus") {
   gulp.task("css", function() {
-    return (
-      gulp
+    return gulp
       .src(["src/static/stylus/main.styl"])
       .pipe(plugin.sourcemaps.init())
-      .pipe(plugin.stylus().on("error", plugin.notify.onError(
-        "*** STYLUS ***: <%= error.message %>")))
-      .pipe(plugin.autoprefixer({
-        remove: false,
-        cascade: false
-      }))
+      .pipe(
+        plugin.stylus().on("error", plugin.notify.onError("*** STYLUS ***: <%= error.message %>"))
+      )
+      .pipe(
+        plugin.autoprefixer({
+          remove: false,
+          cascade: false
+        })
+      )
       .pipe(plugin.sourcemaps.write("../css"))
       .pipe(gulp.dest(destAssetsDir + "/css"))
-    );
+      .pipe(browserSync.stream());
   });
 }
 
 if (css == "scss") {
   gulp.task("css", function() {
-    return (
-      gulp
+    return gulp
       .src(["src/static/scss/main.scss"])
       .pipe(plugin.sourcemaps.init())
       .pipe(
         plugin
-        .sass({
-          outputStyle: "expanded"
-        })
-        .on("error", plugin.notify.onError(
-          "*** SASS ***: <%= error.message %>"))
+          .sass({
+            outputStyle: "expanded"
+          })
+          .on("error", plugin.notify.onError("*** SASS ***: <%= error.message %>"))
       )
-      .pipe(plugin.autoprefixer({
-        remove: false,
-        cascade: false
-      }))
+      .pipe(
+        plugin.autoprefixer({
+          remove: false,
+          cascade: false
+        })
+      )
       .pipe(plugin.sourcemaps.write("../css"))
       .pipe(gulp.dest(destAssetsDir + "/css"))
-    );
+      .pipe(browserSync.stream());
   });
 }
 
@@ -84,35 +80,38 @@ gulp.task("css-minify", function() {
 gulp.task("pug", function() {
   return gulp
     .src(["src/pages/*.pug", "!src/pages/*_.pug"])
-    .pipe(plugin.pug({
-      pretty: true,
-      basedir: "src/"
-    }))
+    .pipe(
+      plugin.pug({
+        pretty: true,
+        basedir: "src/"
+      })
+    )
     .on("error", plugin.notify.onError("*** PUG ***: <%= error.message %>"))
-    .pipe(plugin.notify({
-      onLast: true,
-      message: "PUG done! Reloaded."
-    }))
+    .pipe(
+      plugin.notify({
+        onLast: true,
+        message: "PUG done! Reloaded."
+      })
+    )
     .pipe(gulp.dest("dest"));
 });
 
 // JS
 gulp.task("js", function() {
-  const js = [
-    "src/static/js/main.js"
-  ];
+  const js = ["src/static/js/main.js"];
 
-  return (
-    gulp
+  return gulp
     .src(js)
     .pipe(plugin.sourcemaps.init())
-    .pipe(plugin.babel({
-      presets: ["@babel/env"]
-    }))
+    .pipe(
+      plugin.babel({
+        presets: ["@babel/env"]
+      })
+    )
     .pipe(plugin.concat("main.js"))
     .pipe(plugin.sourcemaps.write("../js"))
     .pipe(gulp.dest(destAssetsDir + "/js"))
-  );
+    .pipe(browserSync.stream());
 });
 
 gulp.task("js-minify", function() {
@@ -136,8 +135,8 @@ gulp.task("copylibs", function() {
   // var libs = localCss.concat(localJs);
 
   // var stream = gulp
-  //   .src(libs, {
-  //     base: "./src/libs/"
+  //   .src(localLibs, {
+  //     base: "./src/static/libs/"
   //   })
   //   .pipe(gulp.dest(destAssetsDir + "/libs"));
 
@@ -162,6 +161,7 @@ gulp.task("libs", function() {
   var stream = gulp
     .src(js)
     .pipe(plugin.concat("libs.min.js"))
+    .pipe(plugin.uglify())
     .pipe(gulp.dest(destAssetsDir + "/js"));
 
   return stream;
@@ -176,13 +176,17 @@ gulp.task("assets", function() {
 gulp.task("svg", function() {
   return gulp
     .src("src/static/assets/icons/**/*.svg")
-    .pipe(plugin.svgmin({
-      plugins: [{
-        removeAttrs: {
-          attrs: "(fill|stroke|opacity)"
-        }
-      }]
-    }))
+    .pipe(
+      plugin.svgmin({
+        plugins: [
+          {
+            removeAttrs: {
+              attrs: "(fill|stroke|opacity)"
+            }
+          }
+        ]
+      })
+    )
     .pipe(
       plugin.svgSprite({
         mode: {
@@ -216,50 +220,45 @@ gulp.task("svg-colored", function() {
 });
 
 gulp.task("watcher", function(done) {
-  plugin.livereload.changed("/");
+  browserSync.reload("/");
+  done();
+});
+
+gulp.task("del", function(done) {
+  del.sync(["dest/**"]);
   done();
 });
 
 // Watch
 gulp.task("watch", function() {
-
-  http.createServer(st({
-    path: __dirname + "/dest",
-    index: "index.html",
-    cache: false
-  })).listen(3000);
-
-  plugin.livereload.listen({
-    basePath: "dest",
-    start: true
+  browserSync.init({
+    server: {
+      baseDir: "dest"
+    },
+    open: false
   });
 
   gulp.watch("src/**/*.pug", gulp.series("pug", "watcher"));
 
-  gulp.watch("src/static/js/main.js", gulp.series("js", "js-minify",
-    "watcher"));
+  gulp.watch("src/static/js/main.js", gulp.series("js", "js-minify"));
 
   if (css == "scss") {
-    gulp.watch("src/**/*.scss", gulp.series("css", "css-minify", "watcher"));
+    gulp.watch("src/**/*.scss", gulp.series("css", "css-minify"));
   }
 
   if (css == "stylus") {
-    gulp.watch("src/**/*.styl", gulp.series("css", "css-minify", "watcher"));
+    gulp.watch("src/**/*.styl", gulp.series("css", "css-minify"));
   }
 
   gulp.watch("src/static/libs/**/*.*", gulp.series("libs", "watcher"));
-
-  console.log("Watch on http://localhost:3000");
 });
 
-gulp.task("media", gulp.series("assets", "svg", "svg-colored", "watcher"),
-  function() {});
+gulp.task("media", gulp.series("assets", "svg", "svg-colored", "watcher"), function() {});
 
 gulp.task(
   "build",
-  gulp.series("assets", "svg", "copylibs", "libs", "css", "css-minify", "pug",
-    "js", "js-minify"),
+  gulp.series("assets", "svg", "copylibs", "libs", "css", "css-minify", "pug", "js", "js-minify"),
   function() {}
 );
 
-gulp.task("default", gulp.series("build", "watch"), function() {});
+gulp.task("default", gulp.series("del", "build", "watch"), function() {});
