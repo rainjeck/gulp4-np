@@ -5,10 +5,10 @@ mixin svg( iconName )
   svg(class= attributes.class): use(xlink:href=IMGPATH + 'sprite.svg#' + iconName)
 
 mixin svg-color( iconName )
-  svg(class= attributes.class): use(xlink:href=IMGPATH + 'sprite-colored.svg#' + iconName)
+  svg(class= attributes.class): use(xlink:href=IMGPATH + 'sprite-color.svg#' + iconName)
 
-include components/header
-include components/footer
+include header
+include footer
 
 block vars
 
@@ -49,9 +49,10 @@ html(lang="ru-RU")
       block footer
       // // FOOTER
 
+      block modals
+      //- // // .MODALS
     // // .WRAPPER
 
-    block modals
 
     script(src="assets/js/libs.min.js")
     script(src="assets/js/main.js")

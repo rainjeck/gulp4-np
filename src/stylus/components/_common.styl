@@ -67,7 +67,6 @@ body
   flex-shrink 0
 
 
-
 /*!
  --- UI ELEMENTS --------------------------------
 */
@@ -79,6 +78,10 @@ a
   color inherit
   transit()
 
+  &.link:hover
+    opacity 0.6
+
+
 strong, b
   font-weight bold
 
@@ -89,39 +92,46 @@ button, input, select, textarea
   font-size inherit
   color inherit
   display block
-  width 100%
+  width auto
   outline none
   line-height 1
   border 0
   background-color rgba(255,255,255,0)
   transit()
 
+
 button,
 button[type="submit"],
 input[type="submit"]
   cursor pointer
 
+
 button[type='submit']:disabled,
 input[type='submit']:disabled
   cursor not-allowed
 
+
 input[type="search"],
 input[type=number]
   -webkit-appearance textfield
+
 
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button
   -webkit-appearance none
   margin 0
 
+
 textarea
   width 100%
   resize none
+
 
 fieldset
   border none
   margin 0
   padding 0
+
 
 .select
   select
@@ -129,8 +139,6 @@ fieldset
     &::-ms-expand
       display none
 
-ul, ol
-  padding-left 1.2em
 
 h1, h2, h3, h4, h5, h6
   margin 0

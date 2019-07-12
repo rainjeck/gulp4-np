@@ -7,9 +7,13 @@ var destAssetsDir = "dest/assets";
 
 var css = "stylus"; // 'sass' or 'stylus'
 
-var libsCss = ["node_modules/normalize.css/normalize.css"];
+var libsCss = [
+  "node_modules/normalize.css/normalize.css"
+];
 
-var libsJs = ["node_modules/svg4everybody/dist/svg4everybody.min.js"];
+var libsJs = [
+  "node_modules/svg4everybody/dist/svg4everybody.min.js"
+];
 
 var localCss = [];
 var localJs = [];
@@ -27,10 +31,11 @@ gulp.task("server", function() {
 if (css == "stylus") {
   gulp.task("css", function() {
     return gulp
-      .src(["src/static/stylus/main.styl"])
+      .src(["src/stylus/main.styl"])
       .pipe(plugin.sourcemaps.init())
       .pipe(
-        plugin.stylus().on("error", plugin.notify.onError("*** STYLUS ***: <%= error.message %>"))
+        plugin.stylus().on("error", plugin.notify.onError(
+          "*** STYLUS ***: <%= error.message %>"))
       )
       .pipe(
         plugin.autoprefixer({
@@ -47,14 +52,15 @@ if (css == "stylus") {
 if (css == "scss") {
   gulp.task("css", function() {
     return gulp
-      .src(["src/static/scss/main.scss"])
+      .src(["src/scss/main.scss"])
       .pipe(plugin.sourcemaps.init())
       .pipe(
         plugin
-          .sass({
-            outputStyle: "expanded"
-          })
-          .on("error", plugin.notify.onError("*** SASS ***: <%= error.message %>"))
+        .sass({
+          outputStyle: "expanded"
+        })
+        .on("error", plugin.notify.onError(
+          "*** SASS ***: <%= error.message %>"))
       )
       .pipe(
         plugin.autoprefixer({
@@ -79,7 +85,7 @@ gulp.task("css-minify", function() {
 // Pug
 gulp.task("pug", function() {
   return gulp
-    .src(["src/pages/*.pug", "!src/pages/*_.pug"])
+    .src(["src/pug/*.pug", "!src/pug/*_.pug"])
     .pipe(
       plugin.pug({
         pretty: true,
@@ -98,7 +104,7 @@ gulp.task("pug", function() {
 
 // JS
 gulp.task("js", function() {
-  const js = ["src/static/js/main.js"];
+  const js = ["src/js/main.js"];
 
   return gulp
     .src(js)
@@ -169,22 +175,22 @@ gulp.task("libs", function() {
 
 // Assets
 gulp.task("assets", function() {
-  return gulp.src("src/static/assets/**/*.*").pipe(gulp.dest(destAssetsDir));
+  return gulp.src("src/assets/**/*.*").pipe(gulp.dest(destAssetsDir));
 });
 
 // SVG
 gulp.task("svg", function() {
+  del(["src/assets/icons/sprite*", "!src/assets/icons/sprite-color*"]);
+
   return gulp
-    .src("src/static/assets/icons/**/*.svg")
+    .src(["src/assets/icons/*.svg", "!src/assets/icons/sprite-color.s*"])
     .pipe(
       plugin.svgmin({
-        plugins: [
-          {
-            removeAttrs: {
-              attrs: "(fill|stroke|opacity)"
-            }
+        plugins: [{
+          removeAttrs: {
+            attrs: "(fill|stroke|opacity)"
           }
-        ]
+        }]
       })
     )
     .pipe(
@@ -201,15 +207,17 @@ gulp.task("svg", function() {
     .pipe(gulp.dest(destAssetsDir + "/icons"));
 });
 
-gulp.task("svg-colored", function() {
+gulp.task("svg-color", function() {
+  del(["src/assets/icons/sprite*", "!src/assets/icons/sprite.s*"]);
+
   return gulp
-    .src("src/static/assets/icons/**/*.svg")
+    .src(["src/assets/icons/*.svg", "!src/assets/icons/sprite.s*"])
     .pipe(plugin.svgmin())
     .pipe(
       plugin.svgSprite({
         mode: {
           symbol: {
-            sprite: "sprite-colored.svg", // имя файла
+            sprite: "sprite-color.svg", // имя файла
             bust: false, // отключаем хэш в имени файла
             dest: "" // отключаем файловую струтуру (по умолчанию, создаем в папке gulp.dest)
           }
@@ -238,26 +246,29 @@ gulp.task("watch", function() {
     open: false
   });
 
-  gulp.watch("src/**/*.pug", gulp.series("pug", "watcher"));
+  gulp.watch("src/pug/**/*.pug", gulp.series("pug", "watcher"));
 
-  gulp.watch("src/static/js/main.js", gulp.series("js", "js-minify"));
+  gulp.watch("src/js/**/*.js", gulp.series("js", "js-minify"));
 
   if (css == "scss") {
-    gulp.watch("src/**/*.scss", gulp.series("css", "css-minify"));
+    gulp.watch("src/scss/**/*.scss", gulp.series("css", "css-minify"));
   }
 
   if (css == "stylus") {
-    gulp.watch("src/**/*.styl", gulp.series("css", "css-minify"));
+    gulp.watch("src/stylus/**/*.styl", gulp.series("css", "css-minify"));
   }
 
-  gulp.watch("src/static/libs/**/*.*", gulp.series("libs", "watcher"));
+  gulp.watch("src/libs/**/*.*", gulp.series("libs", "watcher"));
 });
 
-gulp.task("media", gulp.series("assets", "svg", "svg-colored", "watcher"), function() {});
+gulp.task("media", gulp.series("assets", "svg", "svg-color", "watcher"),
+  function() {});
 
 gulp.task(
   "build",
-  gulp.series("assets", "svg", "copylibs", "libs", "css", "css-minify", "pug", "js", "js-minify"),
+  gulp.series("assets", "svg", "svg-color", "copylibs", "libs", "css",
+    "css-minify", "pug",
+    "js", "js-minify"),
   function() {}
 );
 
