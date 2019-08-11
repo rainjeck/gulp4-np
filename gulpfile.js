@@ -246,16 +246,16 @@ gulp.task("watch", function() {
     open: false
   });
 
-  gulp.watch("src/pug/**/*.pug", gulp.series("pug", "watcher"));
+  gulp.watch("src/**/*.pug", gulp.series("pug", "watcher"));
 
   gulp.watch("src/js/**/*.js", gulp.series("js", "js-minify"));
 
   if (css == "scss") {
-    gulp.watch("src/scss/**/*.scss", gulp.series("css", "css-minify"));
+    gulp.watch("src/**/*.scss", gulp.series("css", "css-minify"));
   }
 
   if (css == "stylus") {
-    gulp.watch("src/stylus/**/*.styl", gulp.series("css", "css-minify"));
+    gulp.watch("src/**/*.styl", gulp.series("css", "css-minify"));
   }
 
   gulp.watch("src/libs/**/*.*", gulp.series("libs", "watcher"));
