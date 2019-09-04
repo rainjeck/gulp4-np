@@ -1,14 +1,17 @@
 - var IMGPATH = "assets/images/";
 - var ICOPATH = "assets/icons/";
 
+
 mixin svg( iconName )
-  svg(class= attributes.class): use(xlink:href=IMGPATH + 'sprite.svg#' + iconName)
+  svg(class= attributes.class): use(xlink:href=ICOPATH + 'sprite.svg#' + iconName)
 
 mixin svg-color( iconName )
-  svg(class= attributes.class): use(xlink:href=IMGPATH + 'sprite-color.svg#' + iconName)
+  svg(class= attributes.class): use(xlink:href=ICOPATH + 'sprite-color.svg#' + iconName)
+
 
 include header
 include footer
+
 
 block vars
 
