@@ -3,19 +3,25 @@
 */
 
 .hide
-  display none
+  display: none
+  
+
+.tab
+  max-height: 0
+  visibility: hidden
+  opacity: 0
 
 
 .img
-  display block
-  max-width 100%
+  display: block
+  max-width: 100%
 
 
 .iframe-container
   overflow: hidden
   padding-top: 56.25%
   position: relative
-  width 100%
+  width: 100%
 
   iframe
     border: 0
@@ -24,18 +30,3 @@
     position: absolute
     top: 0
     width: 100%
-
-
-.nolaptop
-  @media laptop
-    display none !important
-
-
-.notablet
-  @media tablet
-    display none !important
-
-
-.nomobile
-  @media table
-    display none !important
