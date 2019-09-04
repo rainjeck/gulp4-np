@@ -1,5 +1,5 @@
 /*!
- --- STYLES FOR SIMPLE GRID ---------------------
+ --- GRID ---------------------
 */
 
 gridPadding = 15px
@@ -27,6 +27,7 @@ grid($columns, $prefix = '')
   for $col in 1..$columns
     .cl{$prefix}-{$col}
       max-width floor( ((100% / $columns) * $col), 6 )
+
 
 // grid(12)
 
