@@ -180,10 +180,9 @@ gulp.task("assets", function() {
 
 // SVG
 gulp.task("svg", function() {
-  del(["src/assets/icons/sprite*", "!src/assets/icons/sprite-color*"]);
 
   return gulp
-    .src(["src/assets/icons/*.svg", "!src/assets/icons/sprite-color.s*"])
+    .src(["src/assets/icons/*.svg", "!src/assets/icons/sprite-color.s*", "!src/assets/icons/sprite.s*"])
     .pipe(
       plugin.svgmin({
         plugins: [{
@@ -208,10 +207,9 @@ gulp.task("svg", function() {
 });
 
 gulp.task("svg-color", function() {
-  del(["src/assets/icons/sprite*", "!src/assets/icons/sprite.s*"]);
 
   return gulp
-    .src(["src/assets/icons/*.svg", "!src/assets/icons/sprite.s*"])
+    .src(["src/assets/icons/*.svg", "!src/assets/icons/sprite-color.s*", "!src/assets/icons/sprite.s*"])
     .pipe(plugin.svgmin())
     .pipe(
       plugin.svgSprite({
@@ -248,7 +246,7 @@ gulp.task("watch", function() {
 
   gulp.watch("src/**/*.pug", gulp.series("pug", "watcher"));
 
-  gulp.watch("src/js/**/*.js", gulp.series("js", "js-minify"));
+  gulp.watch("src/**/*.js", gulp.series("js", "js-minify"));
 
   if (css == "scss") {
     gulp.watch("src/**/*.scss", gulp.series("css", "css-minify"));
