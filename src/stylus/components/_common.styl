@@ -25,7 +25,9 @@ body
   font-weight: normal
   background-color: #fff
   line-height: normal
+  overflow: hidden
   display: flex
+  min-height: 100vh
 
 .browsehappy
   display: block
@@ -44,8 +46,8 @@ body
 
 .container
   width: 100%
-  max-width: 1152px
-  padding: 0 16px
+  max-width: 1170px
+  padding: 0 15px
   margin: 0 auto
 
 
@@ -53,18 +55,18 @@ body
  --- FOOTER TO BOTTOM ---------------------------
 */
 .wrapper
-  flex 1 1 auto
-  width 100%
-  min-height 100vh
-  display flex
-  flex-flow column nowrap
+  flex: 1 1 auto
+  width: 100%
+  min-height: 1vh
+  display: flex
+  flex-flow: column nowrap
 
 .main
-  flex 1 1 auto
-  min-height 1vh
+  flex: 1 1 auto
+  min-height: 1vh
 
 .header, .footer
-  flex-shrink 0
+  flex-shrink: 0
 
 
 /*!
@@ -72,73 +74,73 @@ body
 */
 
 a
-  font-size inherit
-  font-family inherit
-  text-decoration none
-  color inherit
+  font-size: inherit
+  font-family: inherit
+  text-decoration: none
+  color: inherit
   transit()
-
-  &.link:hover
-    opacity 0.6
+  
+// a[href]:not([class])
 
 
 strong, b
-  font-weight bold
-
-// a[href]:not([class])
+  font-weight: bold
+  
 
 button, input, select, textarea
-  font-family inherit
-  font-size inherit
-  color inherit
-  display block
-  width auto
-  outline none
-  line-height 1
-  border 0
-  background-color rgba(255,255,255,0)
+  font-family: inherit
+  font-size: inherit
+  color: inherit
+  display: block
+  width: auto
+  outline: none
+  line-height: 1
+  border: 0
+  background-color: rgba(255,255,255,0)
   transit()
 
 
 button,
 button[type="submit"],
 input[type="submit"]
-  cursor pointer
-
-
-button[type='submit']:disabled,
-input[type='submit']:disabled
-  cursor not-allowed
+  cursor: pointer
 
 
 input[type="search"],
 input[type=number]
-  -webkit-appearance textfield
+  -webkit-appearance: textfield
 
 
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button
-  -webkit-appearance none
-  margin 0
+  -webkit-appearance: none
+  margin: 0
+  
+
+button, input, textarea
+  &:disabled
+  &.is-disabled
+    cursor: not-allowed
 
 
 textarea
-  width 100%
-  resize none
+  width: 100%
+  resize: none
 
 
 fieldset
-  border none
-  margin 0
-  padding 0
+  border: none
+  margin: 0
+  padding: 0
 
 
 .select
   select
-    appearance none
+    appearance: none
+    
     &::-ms-expand
-      display none
+      display: none
 
 
 h1, h2, h3, h4, h5, h6
-  margin 0
+  margin: 0
