@@ -1,45 +1,47 @@
 textOverflow($lines)
-  display box
-  display -ms-box
-  display -webkit-box
-  display -moz-box
-  text-overflow ellipsis
-  overflow hidden
-  -webkit-line-clamp $lines
-  box-orient vertical
-  -moz-box-orient vertical
-  -webkit-box-orient vertical
-  -ms-box-orient vertical
+  display: box
+  display: -ms-box
+  display: -webkit-box
+  display: -moz-box
+  text-overflow: ellipsis
+  overflow: hidden
+  -webkit-line-clamp: $lines
+  box-orient: vertical
+  -moz-box-orient: vertical
+  -webkit-box-orient: vertical
+  -ms-box-orient: vertical
 
 
 transit($duration = 0.25s)
-  transition all $duration linear
+  transition: all $duration linear
 
 
 hidden()
-  opacity 0
-  visibility hidden
+  opacity: 0
+  visibility: hidden
+  max-height: 0
 
 
 visible()
-  opacity 1
-  visibility visible
+  opacity: 1
+  visibility: visible
+  max-height: 0
 
 
 pseudo()
-  content ''
-  display block
-  position absolute
+  content: ''
+  display: block
+  position: absolute
 
 
 bg($position, $size)
-  background-repeat no-repeat
-  background-position $position
-  background-size $size
+  background-repeat: no-repeat
+  background-position: $position
+  background-size: $size
 
 
 centered-img()
-  position relative
+  position: relative
 
   img
     width: 100%
@@ -50,11 +52,11 @@ centered-img()
 
 
 resetlist()
-  margin 0
-  padding 0
-  list-style-type none
+  margin: 0
+  padding: 0
+  list-style-type: none
 
 
 size($wsize, $hsize)
-  width unit($wsize, 'px')
-  height unit($hsize, 'px')
+  width: unit($wsize, 'px')
+  height: unit($hsize, 'px')
