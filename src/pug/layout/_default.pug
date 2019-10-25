@@ -9,8 +9,8 @@ mixin svg-color( iconName )
   svg(class= attributes.class): use(xlink:href=ICOPATH + 'sprite-color.svg#' + iconName)
 
 
-include header
-include footer
+include _header
+include _footer
 
 
 block vars
@@ -23,7 +23,7 @@ html(lang="ru-RU")
     meta(name="SKYPE_TOOLBAR" content="SKYPE_TOOLBAR_PARSER_COMPATIBLE")
     meta(name="format-detection" content="telephone=no")
     meta(name="viewport" content="width=device-width,initial-scale=1")
-    meta(name="author" content="https://vk.com/tishukn")
+    //- meta(name="author" content="https://vk.com/tishukn")
 
     link(rel="stylesheet" type='text/css' href="assets/css/libs.min.css")
     link(rel="stylesheet" type='text/css' href="assets/css/main.css")
@@ -54,7 +54,6 @@ html(lang="ru-RU")
       // // FOOTER
 
       block modals
-      //- // // .MODALS
     // // .WRAPPER
 
 

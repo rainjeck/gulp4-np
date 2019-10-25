@@ -2,20 +2,8 @@
  --- BASE ---------------------------------------
 */
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-
-  &:before,
-  &:after {
-    box-sizing: border-box;
-  }
-}
-
 body,
 html {
-  padding: 0;
   border: 0;
   width: 100%;
   overflow-x: hidden;
@@ -31,7 +19,9 @@ body {
   font-weight: normal;
   background-color: #fff;
   line-height: normal;
+  overflow: hidden;
   display: flex;
+  min-height: 100vh;
 }
 
 .browsehappy {

@@ -2,16 +2,7 @@
  --- BASE ---------------------------------------
 */
 
-*
-  box-sizing: border-box
-  margin: 0
-  padding: 0
-
-  &:before, &:after
-    box-sizing: border-box
-
 body, html
-  padding: 0
   border: 0
   width: 100%
   overflow-x: hidden
@@ -79,20 +70,18 @@ a
   text-decoration: none
   color: inherit
   transit()
-  
-// a[href]:not([class])
 
 
 strong, b
   font-weight: bold
-  
+
 
 button, input, select, textarea
   font-family: inherit
   font-size: inherit
   color: inherit
   display: block
-  width: auto
+  width: 100%
   outline: none
   line-height: 1
   border: 0
@@ -107,15 +96,15 @@ input[type="submit"]
 
 
 input[type="search"],
-input[type=number]
+input[type="number"]
   -webkit-appearance: textfield
 
 
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button
   -webkit-appearance: none
   margin: 0
-  
+
 
 button, input, textarea
   &:disabled
@@ -134,13 +123,9 @@ fieldset
   padding: 0
 
 
-.select
-  select
+.select select,
+select.select
     appearance: none
-    
+
     &::-ms-expand
       display: none
-
-
-h1, h2, h3, h4, h5, h6
-  margin: 0
