@@ -1,17 +1,13 @@
 - var IMGPATH = "assets/images/";
 - var ICOPATH = "assets/icons/";
 
-
-mixin svg( iconName )
+mixin svg(iconName)
   svg(class= attributes.class): use(xlink:href=ICOPATH + 'sprite.svg#' + iconName)
 
-mixin svg-color( iconName )
+mixin svg-color(iconName)
   svg(class= attributes.class): use(xlink:href=ICOPATH + 'sprite-color.svg#' + iconName)
 
-
-include _header
-include _footer
-
+include components
 
 block vars
 
@@ -37,25 +33,25 @@ html(lang="ru-RU")
     <!--[if lte IE 9]>
     p.browsehappy Вы используете #[strong устаревший] браузер. Пожалуйста #[a(href="http://browsehappy.com/", target="_blank") обновите ваш браузер] чтобы воспользоваться всем функционалом сайта.
     <![endif]-->
-
+    
+    // WRAPPER
     .wrapper
 
       // HEADER
       block header
-      // // HEADER
+      // end .HEADER
 
       // MAIN
       main.main
         block content
-      // // MAIN
+      // end .MAIN
 
       // FOOTER
       block footer
-      // // FOOTER
+      // end .FOOTER
 
       block modals
-    // // .WRAPPER
-
+    // end .WRAPPER
 
     script(src="assets/js/libs.min.js")
     script(src="assets/js/main.js")

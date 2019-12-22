@@ -7,9 +7,24 @@
 
 
 .tab
-  max-height: 0
+  display: none
   visibility: hidden
   opacity: 0
+
+  &.is-active
+    display: block
+    visibility: visible
+    animation: tab-show 0.25s linear 0.01s 1 forwards
+
+
+@keyframes tab-show {
+  from {
+    opacity: 0
+  }
+  to {
+    opacity: 1
+  }
+}
 
 
 .iframe-container
