@@ -1,0 +1,280 @@
+/*
+  BREAKPOINTS
+
+  iPad Pro - 1366, 1024
+  macbook old = 1280
+  iPad - 1024, 768
+  iPhone - 414, 375, 320
+
+  laptop = 'all and (max-width: 1366px)'
+  tablet = 'all and (max-width: 1199px)'
+  pad = 'all and (max-width: 1023px)'
+  phone = 'all and (max-width: 767px)'
+*/
+/*
+ --- FONTS --------------------------------------
+*/
+/*
+ --- BASE ---------------------------------------
+*/
+body,
+html {
+  border: 0;
+  width: 100%;
+  overflow-x: hidden;
+}
+html {
+  font-size: 16px;
+}
+body {
+  font-family: sans-serif;
+  color: #000;
+  font-weight: normal;
+  background-color: #fff;
+  line-height: normal;
+  overflow: hidden;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  min-height: 100vh;
+}
+.browsehappy {
+  display: block;
+  margin: 0;
+  padding: 30px;
+  text-align: center;
+  background: #e55454;
+  color: #fff;
+  font-size: 18px;
+  line-height: 1.4;
+}
+.browsehappy a,
+.browsehappy a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+.container {
+  width: 100%;
+  max-width: 1170px;
+  padding: 0 15px;
+  margin: 0 auto;
+}
+/*
+ --- FOOTER TO BOTTOM ---------------------------
+*/
+.wrapper {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 1 auto;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  width: 100%;
+  min-height: 1vh;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-flow: column nowrap;
+  -ms-flex-flow: column nowrap;
+  flex-flow: column nowrap;
+}
+.main {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 1 auto;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  min-height: 1vh;
+}
+.header,
+.footer {
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+}
+/*
+ --- UI ELEMENTS --------------------------------
+*/
+a {
+  font-size: inherit;
+  font-family: inherit;
+  text-decoration: none;
+  color: inherit;
+  -webkit-transition: all 0.25s linear;
+  -o-transition: all 0.25s linear;
+  transition: all 0.25s linear;
+}
+strong,
+b {
+  font-weight: bold;
+}
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  display: block;
+  width: auto;
+  outline: none;
+  line-height: 1;
+  border: 0;
+  background-color: rgba(255,255,255,0);
+  -webkit-transition: all 0.25s linear;
+  -o-transition: all 0.25s linear;
+  transition: all 0.25s linear;
+}
+button,
+button[type="submit"],
+input[type="submit"] {
+  cursor: pointer;
+}
+input[type="search"],
+input[type="number"] {
+  -webkit-appearance: textfield;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+button:disabled,
+input:disabled,
+textarea:disabled,
+button.is-disabled,
+input.is-disabled,
+textarea.is-disabled {
+  cursor: not-allowed;
+}
+textarea {
+  width: 100%;
+  resize: none;
+}
+fieldset {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+select.select,
+.select select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+select.select::-ms-expand,
+.select select::-ms-expand {
+  display: none;
+}
+/*
+ --- GRID ---------------------
+*/
+.rw {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 0 -15px;
+}
+.cl {
+  width: 100%;
+  padding: 0 15px;
+}
+/*
+ --- HELPERS ------------------------------------
+*/
+.hide {
+  display: none;
+}
+.tab {
+  display: none;
+  visibility: hidden;
+  opacity: 0;
+}
+.tab.is-active {
+  display: block;
+  visibility: visible;
+  -webkit-animation: tab-show 0.25s linear 0.01s 1 forwards;
+  animation: tab-show 0.25s linear 0.01s 1 forwards;
+}
+.iframe-container {
+  overflow: hidden;
+  padding-top: 56.25%;
+  position: relative;
+  width: 100%;
+}
+.iframe-container iframe {
+  border: 0;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+@-moz-keyframes tab-show {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes tab-show {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@-o-keyframes tab-show {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes tab-show {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+/*
+ --- UI -----------------------------------------
+*/
+.link {
+  -webkit-transition: all 0.25s linear;
+  -o-transition: all 0.25s linear;
+  transition: all 0.25s linear;
+}
+.link:hover {
+  opacity: 0.6;
+}
+/*
+ --- HEADER -------------------------------------
+ */
+.header {
+  background-color: #eee;
+}
+/*
+ --- FOOTER -------------------------------------
+ */
+.footer {
+  background-color: #ccc;
+}
+
+/*# sourceMappingURL=../css/main.css.map */

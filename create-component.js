@@ -44,7 +44,7 @@ function createComponent() {
   // Push @import to main.styl
   try {
     fd = fs.openSync('./src/stylus/main.styl', 'a');
-    fs.appendFileSync(fd, '@import "../pug/components/'+ fName +'/'+ fName +'.styl";', 'utf8');
+    fs.appendFileSync(fd, '\n@import "../pug/components/'+ fName +'/'+ fName +'.styl";', 'utf8');
   } catch (err) {
     console.log(err);
   } finally {
@@ -56,7 +56,7 @@ function createComponent() {
 
   try {
     fd = fs.openSync('./src/pug/layout/components.pug', 'a');
-    fs.appendFileSync(fd, 'include ../components/'+ fName +'/'+ fName, 'utf8');
+    fs.appendFileSync(fd, '\ninclude ../components/'+ fName +'/'+ fName, 'utf8');
   } catch (err) {
     console.log(err);
   } finally {
@@ -64,7 +64,7 @@ function createComponent() {
       fs.closeSync(fd);
   }
 
-  console.log('COMPONENT "' + fName + '" HAVE BEEN CREATED!');
+  console.log('COMPONENT "' + fName + '" HAS BEEN CREATED!');
 }
 
 createComponent();
