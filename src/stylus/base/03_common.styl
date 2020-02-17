@@ -1,6 +1,7 @@
 /*!
- --- BASE ---------------------------------------
-*/
+  BASE
+  ===============================================
+  */
 
 body, html
   border: 0
@@ -43,8 +44,9 @@ body
 
 
 /*!
- --- FOOTER TO BOTTOM ---------------------------
-*/
+  FOOTER TO BOTTOM
+  ===============================================
+  */
 .wrapper
   flex: 1 1 auto
   width: 100%
@@ -61,9 +63,9 @@ body
 
 
 /*!
- --- UI ELEMENTS --------------------------------
-*/
-
+  UI ELEMENTS
+  ===============================================
+  */
 a
   font-size: inherit
   font-family: inherit
@@ -71,16 +73,13 @@ a
   color: inherit
   transit()
 
-
 strong, b
   font-weight: bold
-
 
 button, input, select, textarea
   font-family: inherit
   font-size: inherit
   color: inherit
-  display: block
   width: auto
   outline: none
   line-height: 1
@@ -88,40 +87,33 @@ button, input, select, textarea
   background-color: rgba(255,255,255,0)
   transit()
 
-
 button,
 button[type="submit"],
 input[type="submit"]
   cursor: pointer
 
-
 input[type="search"],
 input[type="number"]
   -webkit-appearance: textfield
-
 
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button
   -webkit-appearance: none
   margin: 0
 
-
 button, input, textarea
   &:disabled
   &.is-disabled
     cursor: not-allowed
 
-
 textarea
   width: 100%
   resize: none
-
 
 fieldset
   border: none
   margin: 0
   padding: 0
-
 
 select.select,
 .select select
@@ -130,10 +122,10 @@ select.select,
     &::-ms-expand
       display: none
 
-
 /*!
- --- GRID ---------------------
-*/
+  GRID
+  ===============================================
+  */
 .rw
   display: flex
   flex-direction: row
@@ -158,6 +150,9 @@ grid($columns, $prefix = '')
       max-width floor( ((100% / $columns) * $col), 6 )
 
 // grid(12)
+
+// @media note
+//   grid(12, '-nt')
 
 // @media laptop
 //   grid(12, '-lp')
