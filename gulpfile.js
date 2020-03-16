@@ -10,6 +10,7 @@ var libsCss = [
 ];
 
 var libsJs = [
+  "./node_modules/@babel/polyfill/dist/polyfill.js",
   "./node_modules/svg4everybody/dist/svg4everybody.js"
 ];
 
