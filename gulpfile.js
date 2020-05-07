@@ -22,6 +22,7 @@ var localJs = [];
 var allCss = libsCss.concat(localCss);
 var allJs = libsJs.concat(localJs);
 
+
 var appJs = [
   "src/js/main.js"
 ];
@@ -148,7 +149,7 @@ gulp.task("assets", function() {
 });
 
 // SVG
-gulp.task("svg", function() {
+gulp.task("svg-sprite", function() {
   return gulp
     .src([ "src/assets/icons/*.svg", "!src/assets/icons/sprite*.svg" ])
     .pipe( plugin.svgmin({ plugins: [{ removeAttrs: { attrs: "(fill|stroke|opacity)" } }] }) )
@@ -166,7 +167,7 @@ gulp.task("svg", function() {
     .pipe(gulp.dest(destAssetsDir + "/icons"));
 });
 
-gulp.task("svg-color", function () {
+gulp.task("svg-sprite-color", function () {
   return gulp
     .src([ "src/assets/icons/*.svg", "!src/assets/icons/sprite*.svg" ])
     .pipe( plugin.svgmin() )
@@ -184,7 +185,7 @@ gulp.task("svg-color", function () {
     .pipe( gulp.dest(destAssetsDir + "/icons") );
 });
 
-gulp.task("svg", gulp.series( "svg", "svg-color" ));
+gulp.task("svg", gulp.series( "svg-sprite", "svg-sprite-color" ));
 
 
 // --- WATCHER
@@ -211,9 +212,6 @@ gulp.task("watch", function() {
 });
 
 
-gulp.task("modules", gulp.series( "libs", "watcher" ), function () {});
-
-
 gulp.task("build", gulp.series(
     "assets",
     "svg",
@@ -225,7 +223,9 @@ gulp.task("build", gulp.series(
   function () {}
 );
 
+
+gulp.task("modules", gulp.series( "libs", "watcher" ));
 gulp.task("media", gulp.series( "assets", "svg", "watcher" ));
 
-gulp.task("rebuild", gulp.series( "del", "build" ), function () {});
-gulp.task("default", gulp.series( "build", "watch" ), function () {});
+gulp.task("rebuild", gulp.series( "del", "build" ));
+gulp.task("default", gulp.series( "build", "watch" ));
