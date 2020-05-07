@@ -7,9 +7,12 @@ mixin svg(iconName)
 mixin svg-color(iconName)
   svg(class= attributes.class): use(xlink:href=ICOPATH + 'sprite-color.svg#' + iconName)
 
+
 include components
 
+
 block vars
+
 
 doctype html
 html(lang="ru-RU")
@@ -33,7 +36,7 @@ html(lang="ru-RU")
     <!--[if lte IE 9]>
     p.browsehappy Вы используете #[strong устаревший] браузер. Пожалуйста #[a(href="http://browsehappy.com/", target="_blank") обновите ваш браузер] чтобы воспользоваться всем функционалом сайта.
     <![endif]-->
-    
+
     // WRAPPER
     .wrapper
 

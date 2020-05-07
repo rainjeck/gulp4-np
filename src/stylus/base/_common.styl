@@ -8,18 +8,21 @@ body, html
   width: 100%
   overflow-x: hidden
 
+
 html
   font-size: 16px
 
+
 body
-  font-family: font
-  color: color
+  font-family: $font
+  color: $colorText
   font-weight: normal
   background-color: #fff
   line-height: normal
   overflow: hidden
   display: flex
   min-height: 100vh
+
 
 .browsehappy
   display: block
@@ -36,12 +39,6 @@ body
     color: #fff
     text-decoration: underline
 
-.container
-  width: 100%
-  max-width: 1170px
-  padding: 0 15px
-  margin: 0 auto
-
 
 /*!
   FOOTER TO BOTTOM
@@ -54,9 +51,11 @@ body
   display: flex
   flex-flow: column nowrap
 
+
 .main
   flex: 1 1 auto
   min-height: 1vh
+
 
 .header, .footer
   flex-shrink: 0
@@ -73,8 +72,10 @@ a
   color: inherit
   transit()
 
+
 strong, b
   font-weight: bold
+
 
 button, input, select, textarea
   font-family: inherit
@@ -84,36 +85,45 @@ button, input, select, textarea
   outline: none
   line-height: 1
   border: 0
+  padding: 0
+  margin: 0
   background-color: rgba(255,255,255,0)
   transit()
+
 
 button,
 button[type="submit"],
 input[type="submit"]
   cursor: pointer
 
+
 input[type="search"],
 input[type="number"]
   -webkit-appearance: textfield
+
 
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button
   -webkit-appearance: none
   margin: 0
 
+
 button, input, textarea
   &:disabled
   &.is-disabled
     cursor: not-allowed
 
+
 textarea
   width: 100%
   resize: none
+
 
 fieldset
   border: none
   margin: 0
   padding: 0
+
 
 select.select,
 .select select
@@ -121,6 +131,7 @@ select.select,
 
     &::-ms-expand
       display: none
+
 
 /*!
   GRID
@@ -131,23 +142,28 @@ select.select,
   flex-direction: row
   flex-wrap: wrap
   list-style: none
-  margin: 0 (-(gridPadding))
+  margin: 0 (-($gridPadding))
+
 
 .cl
   width: 100%
-  padding: 0 gridPadding
+  padding: 0 $gridPadding
 
-cl(num,columns)
-  max-width: floor( ((100% / columns)* num), 2 )
 
-col(num, columns)
+cl($num, $columns)
+  max-width: floor( ((100% / $columns) * $num), 2 )
+
+
+col($num, $columns)
   width: 100%
-  max-width: floor( ((100% / columns)* num), 2 )
+  max-width: floor( ((100% / $columns) * $num), 2 )
+
 
 grid($columns, $prefix = '')
   for $col in 1..$columns
     .cl{$prefix}-{$col}
       max-width floor( ((100% / $columns) * $col), 6 )
+
 
 // grid(12)
 

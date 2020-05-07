@@ -12,9 +12,11 @@ trunc($lines)
   -webkit-box-orient: vertical
   -ms-box-orient: vertical
 
+
 //- TRANSITION
-transit($duration = 0.25s)
+transit($duration = 0.32s)
   transition: all $duration linear
+
 
 //- PSEUDO ELEMENTS
 pseudo()
@@ -22,17 +24,13 @@ pseudo()
   display: block
   position: absolute
 
-//- BACKGROUD
+
+//- BACKGROUND
 bg($position, $size)
   background-repeat: no-repeat
   background-position: $position
   background-size: $size
 
-//- RESET UL
-resetul()
-  margin: 0
-  padding: 0
-  list-style-type: none
 
 //- SET SIZE
 size($wsize, $hsize)

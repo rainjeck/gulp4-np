@@ -32,19 +32,9 @@ gulp.task("serve", function () {
 gulp.task("pug", function () {
   return gulp
     .src(["src/pug/pages/*.pug", "!src/pug/pages/_*.pug"])
-    .pipe(
-      plugin.pug({
-        pretty: true,
-        // basedir: "src/"
-      })
-    )
-    .on("error", plugin.notify.onError("*** PUG ***: <%= error.message %>"))
-    // .pipe(
-    //   plugin.notify({
-    //     onLast: true,
-    //     // message: "PUG done!"
-    //   })
-    // )
+    .pipe( plugin.pug({ pretty: true }) )
+    .on( "error", plugin.notify.onError("*** PUG ***: <%= error.message %>") )
+    // .pipe( plugin.notify({ onLast: true, message: "PUG done!" }) )
     .pipe(gulp.dest("dest"));
 });
 
@@ -166,16 +156,8 @@ gulp.task("assets", function () {
 // SVG
 gulp.task("svg-icons", function () {
   return gulp
-    .src(["src/assets/icons/*.svg", "!src/assets/icons/sprite-color.s*", "!src/assets/icons/sprite.s*"])
-    .pipe(
-      plugin.svgmin({
-        plugins: [{
-          removeAttrs: {
-            attrs: "(fill|stroke|opacity)"
-          }
-        }]
-      })
-    )
+    .src(["src/assets/icons/*.svg", "!src/assets/icons/sprite*.svg"])
+    .pipe( plugin.svgmin({ plugins: [{ removeAttrs: { attrs: "(fill|stroke|opacity)" } }] }) )
     .pipe(
       plugin.svgSprite({
         mode: {
@@ -192,7 +174,7 @@ gulp.task("svg-icons", function () {
 
 gulp.task("svg-icons-color", function () {
   return gulp
-    .src(["src/assets/icons/*.svg", "!src/assets/icons/sprite-color.s*", "!src/assets/icons/sprite.s*"])
+    .src(["src/assets/icons/*.svg", "!src/assets/icons/sprite*.svg"])
     .pipe(plugin.svgmin())
     .pipe(
       plugin.svgSprite({
