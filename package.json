@@ -7,7 +7,6 @@
   "devDependencies": {
     "@babel/core": ">=7.4.5",
     "@babel/preset-env": ">=7.4.5",
-    "@babel/polyfill": ">=7.7.0",
     "browser-sync": ">=2.26.3",
     "del": ">=5.0.0",
     "gulp": ">=4.0.0",
@@ -28,6 +27,7 @@
     "gulp-watch": ">=5.0.1"
   },
   "dependencies": {
+    "core-js-bundle": "^3.6.5",
     "modern-css-reset": ">=1.0.4",
     "svg4everybody": ">=2.1.9"
   }
