@@ -100,6 +100,22 @@ input[type="submit"]
 input[type="search"],
 input[type="number"]
   -webkit-appearance: textfield
+  
+/* clears the 'X' from Internet Explorer */
+input[type=search]
+  &::-ms-clear,
+  &::-ms-reveal
+    display: none
+    width: 0
+    height: 0
+
+/* clears the 'X' from Chrome */
+input[type="search"]
+  &::-webkit-search-decoration,
+  &::-webkit-search-cancel-button,
+  &::-webkit-search-results-button,
+  &::-webkit-search-results-decoration
+    display: none
 
 
 input[type="number"]::-webkit-inner-spin-button,
