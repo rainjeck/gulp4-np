@@ -1,7 +1,62 @@
 /*!
+  GRID
+  ===============================================
+  */
+.rw
+  display: flex
+  flex-direction: row
+  flex-wrap: wrap
+  list-style: none
+  margin: 0 (-($gridPadding))
+
+
+.cl
+  width: 100%
+  padding: 0 $gridPadding
+
+
+cl($num, $columns)
+  max-width: floor( ((100% / $columns) * $num), 2 )
+
+
+col($num, $columns)
+  width: 100%
+  max-width: floor( ((100% / $columns) * $num), 2 )
+
+
+grid($columns, $prefix = '')
+  for $col in 1..$columns
+    .cl{$prefix}-{$col}
+      max-width floor( ((100% / $columns) * $col), 6 )
+
+
+// grid(12)
+
+// @media note
+//   grid(12, '-nt')
+
+// @media laptop
+//   grid(12, '-lp')
+
+// @media tablet
+//   grid(12, '-tb')
+
+// @media pad
+//   grid(12, '-pd')
+
+// @media phone
+//   grid(12, '-ph')
+
+
+/*!
   UI
   ===============================================
   */
+
+body
+  font-family: $font
+  color: $colorText
+
 
 .container
   width: 100%
