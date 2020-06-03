@@ -1,16 +1,9 @@
-(() => {
-  const app = {
-    init() {
-      svg4everybody();
+import Module from './modules/module.js';
 
-      console.log("work");
-    },
-    _getWinSize() {
-      const w = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-      const h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-      return {w, h};
-    }
-  };
+class App {
+  constructor() {
+    new Module();
+  }
+};
 
-  app.init();
-})();
+new App();

@@ -2,6 +2,10 @@ var gulp = require("gulp");
 var plugin = require("gulp-load-plugins")();
 var browserSync = require("browser-sync").create();
 var del = require("del");
+var browserify = require('browserify');
+var babelify = require('babelify');
+var source = require('vinyl-source-stream');
+var buffer = require('vinyl-buffer');
 
 
 var destAssetsDir = "dest/assets";
@@ -23,11 +27,6 @@ var allCss = libsCss.concat(localCss);
 var allJs = libsJs.concat(localJs);
 
 
-var appJs = [
-  "src/js/main.js"
-];
-
-
 // --- STATIC SERVER
 gulp.task("serve", function() {
   browserSync.init({ server: { baseDir: "dest" } });
@@ -38,7 +37,7 @@ gulp.task("pug", function() {
   return gulp.src([
     "src/pug/pages/*.pug",
     "!src/pug/pages/_*.pug",
-    "!src/pug/pages/_*/*.pug"
+    "!src/pug/pages/_*/*.*"
     ])
     .pipe( plugin.pug({ pretty: true }) )
     .on( "error", plugin.notify.onError("*** PUG ***: <%= error.message %>") )
@@ -57,7 +56,6 @@ gulp.task("css-app", function() {
     .pipe( plugin.autoprefixer({ remove: false, cascade: false }) )
     .pipe( plugin.sourcemaps.write("../css") )
     .pipe( gulp.dest(destAssetsDir + "/css") )
-    .pipe( browserSync.stream() );
 });
 
 gulp.task("css-minify", function() {
@@ -81,13 +79,16 @@ gulp.task("css", gulp.series( "css-app", "css-minify", "css-bundle" ));
 
 // --- JS
 gulp.task("js-app", function() {
-  return gulp.src( appJs )
-    .pipe( plugin.sourcemaps.init() )
-    .pipe( plugin.babel({ retainLines: true, presets: ["@babel/env"] }) )
-    .pipe( plugin.concat("main.js") )
-    .pipe( plugin.sourcemaps.write("../js") )
-    .pipe( gulp.dest(destAssetsDir + "/js") )
-    .pipe( browserSync.stream() );
+  return browserify({
+    entries: [ 'src/js/main.js' ]
+  })
+  .transform( babelify, { presets: ['@babel/env'] })
+  .bundle()
+  .pipe( source( 'main.js' ) )
+  .pipe( buffer() )
+  .pipe( plugin.sourcemaps.init({ loadMaps: true }) )
+  .pipe( plugin.sourcemaps.write("../js") )
+  .pipe( gulp.dest(destAssetsDir + "/js") )
 });
 
 gulp.task("js-minify", function() {
@@ -110,11 +111,6 @@ gulp.task("js", gulp.series( "js-app", "js-minify", "js-bundle" ));
 
 
 // --- LIBS
-gulp.task("copy-libs-modules", function() {
-  return gulp.src( libsCss.concat(libsJs) )
-    .pipe( gulp.dest(destAssetsDir + "/libs/modules") );
-});
-
 gulp.task("copy-libs", function() {
   var libs = libsCss.concat(libsJs);
 
@@ -140,7 +136,7 @@ gulp.task("libs-css", function() {
     .pipe( gulp.dest(destAssetsDir + "/css") );
 });
 
-gulp.task("libs", gulp.series( "copy-libs-modules", "copy-libs", "libs-js", "libs-css" ));
+gulp.task("libs", gulp.series( "copy-libs", "libs-js", "libs-css" ));
 
 
 // Assets
@@ -155,13 +151,7 @@ gulp.task("svg-sprite", function() {
     .pipe( plugin.svgmin({ plugins: [{ removeAttrs: { attrs: "(fill|stroke|opacity)" } }] }) )
     .pipe(
       plugin.svgSprite({
-        mode: {
-          symbol: {
-            sprite: "sprite.svg", // имя файла
-            bust: false, // отключаем хэш в имени файла
-            dest: "" // отключаем файловую струтуру (по умолчанию, создаем в папке gulp.dest)
-          }
-        }
+        mode: { symbol: { sprite: "sprite.svg", bust: false, dest: "" } }
       })
     )
     .pipe(gulp.dest(destAssetsDir + "/icons"));
@@ -173,13 +163,7 @@ gulp.task("svg-sprite-color", function () {
     .pipe( plugin.svgmin() )
     .pipe(
       plugin.svgSprite({
-        mode: {
-          symbol: {
-            sprite: "sprite-color.svg", // имя файла
-            bust: false, // отключаем хэш в имени файла
-            dest: "" // отключаем файловую струтуру (по умолчанию, создаем в папке gulp.dest)
-          }
-        }
+        mode: { symbol: { sprite: "sprite-color.svg", bust: false, dest: "" } }
       })
     )
     .pipe( gulp.dest(destAssetsDir + "/icons") );
@@ -208,7 +192,7 @@ gulp.task("watch", function() {
 
   gulp.watch("src/**/*.pug", gulp.series("pug", "watcher"));
   gulp.watch("src/**/*.js", gulp.series("js", "watcher"));
-  gulp.watch("src/**/*.styl", gulp.series("css"));
+  gulp.watch("src/**/*.styl", gulp.series("css", "watcher"));
 });
 
 
