@@ -12,11 +12,11 @@ function createComponent() {
   }
 
   const fName = componentName[0];
-  const path = './src/pug/components/' + fName;
+  const path = './src/components/' + fName;
 
   // Check folder
   if ( fs.existsSync(path) ) {
-    console.log('ERROR: Folder "src/pug/components/' + fName + '" exists');
+    console.log('ERROR: Folder "src/components/' + fName + '" exists');
     return;
   }
 
@@ -44,7 +44,7 @@ function createComponent() {
   // Push @import to main.styl
   try {
     fd = fs.openSync('./src/stylus/main.styl', 'a');
-    fs.appendFileSync(fd, '\n@import "../pug/components/'+ fName +'/'+ fName +'.styl";', 'utf8');
+    fs.appendFileSync(fd, '\n@import "../components/'+ fName +'/'+ fName +'.styl";', 'utf8');
   } catch (err) {
     console.log(err);
   } finally {
@@ -56,7 +56,7 @@ function createComponent() {
 
   try {
     fd = fs.openSync('./src/pug/layout/components.pug', 'a');
-    fs.appendFileSync(fd, '\ninclude ../components/'+ fName +'/'+ fName, 'utf8');
+    fs.appendFileSync(fd, '\ninclude ../../components/'+ fName +'/'+ fName, 'utf8');
   } catch (err) {
     console.log(err);
   } finally {

@@ -2,17 +2,14 @@ var gulp = require("gulp");
 var plugin = require("gulp-load-plugins")();
 var browserSync = require("browser-sync").create();
 var del = require("del");
-var browserify = require('browserify');
-var babelify = require('babelify');
-var source = require('vinyl-source-stream');
-var buffer = require('vinyl-buffer');
+var webpack = require('webpack-stream');
 
 
 var destAssetsDir = "dest/assets";
 
 
 var libsCss = [
-  "node_modules/modern-css-reset/dist/reset.css"
+  "./node_modules/modern-css-reset/dist/reset.css"
 ];
 
 var libsJs = [
@@ -79,16 +76,19 @@ gulp.task("css", gulp.series( "css-app", "css-minify", "css-bundle" ));
 
 // --- JS
 gulp.task("js-app", function() {
-  return browserify({
-    entries: [ 'src/js/main.js' ]
-  })
-  .transform( babelify, { presets: ['@babel/env'] })
-  .bundle()
-  .pipe( source( 'main.js' ) )
-  .pipe( buffer() )
-  .pipe( plugin.sourcemaps.init({ loadMaps: true }) )
-  .pipe( plugin.sourcemaps.write("../js") )
-  .pipe( gulp.dest(destAssetsDir + "/js") )
+  return gulp.src( './src/js/main.js' )
+    .pipe( webpack({
+      mode: 'development',
+      output: { filename: 'main.js' },
+      module: {
+        rules: [{
+          test: /\.js$/,
+          use: { loader: 'babel-loader', options: { presets: ['@babel/preset-env'] } }
+        }]
+      },
+      devtool: 'source-map',
+    }) )
+    .pipe( gulp.dest(destAssetsDir + "/js") )
 });
 
 gulp.task("js-minify", function() {
@@ -100,8 +100,8 @@ gulp.task("js-minify", function() {
 
 gulp.task("js-bundle", function() {
   return gulp.src([
-    destAssetsDir + '/js/**/libs.min.js',
-    destAssetsDir + 'js/**/main.min.js'
+      destAssetsDir + '/js/**/libs.min.js',
+      destAssetsDir + 'js/**/main.min.js'
     ])
     .pipe( plugin.concat("bundle.min.js") )
     .pipe( gulp.dest(destAssetsDir + "/js/") )

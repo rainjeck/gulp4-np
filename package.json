@@ -1,19 +1,18 @@
 {
   "name": "gulp4-new-project",
   "version": "1.0.0",
-  "main": "index.js",
+  "author": "Tishuk Nadezda",
+  "homepage": "https://github.com/rainjeck/gulp4-np",
   "license": "MIT",
   "browserslist": "last 10 versions",
   "devDependencies": {
     "@babel/core": ">=7.4.5",
     "@babel/preset-env": ">=7.4.5",
-    "babelify": "^10.0.0",
+    "babel-loader": "^8.1.0",
     "browser-sync": ">=2.26.3",
-    "browserify": "^16.5.1",
     "del": ">=5.0.0",
     "gulp": ">=4.0.0",
     "gulp-autoprefixer": ">=6.0.0",
-    "gulp-babel": ">=8.0.0",
     "gulp-clean-css": ">=4.2.0",
     "gulp-concat": ">=2.6.1",
     "gulp-livereload": ">=4.0.1",
@@ -27,13 +26,7 @@
     "gulp-svgmin": ">=2.1.0",
     "gulp-uglify": ">=3.0.2",
     "gulp-watch": ">=5.0.1",
-    "vinyl-buffer": "^1.0.1",
-    "vinyl-source-stream": "^2.0.0"
-  },
-  "babel": {
-    "presets": [
-      "@babel/env"
-    ]
+    "webpack-stream": "^5.2.1"
   },
   "dependencies": {
     "core-js-bundle": "^3.6.5",
