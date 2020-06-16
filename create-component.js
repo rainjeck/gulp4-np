@@ -2,6 +2,8 @@
 
 const fs = require('fs');
 
+const cssExt = 'styl'; // 'styl' or 'scss'
+
 function createComponent() {
   const componentName = process.argv.slice(2);
 
@@ -27,7 +29,7 @@ function createComponent() {
 
   // Add stylus file
   try {
-    fs.appendFileSync(path + '/' + fName + '.styl', '/*!\n * --- '+ fName + '\n */');
+    fs.appendFileSync(path + '/' + fName + '.' + cssExt, '/*!\n * --- '+ fName + '\n */');
   } catch (err) {
     console.log(err);
   }
@@ -43,8 +45,8 @@ function createComponent() {
 
   // Push @import to main.styl
   try {
-    fd = fs.openSync('./src/stylus/main.styl', 'a');
-    fs.appendFileSync(fd, '\n@import "../components/'+ fName +'/'+ fName +'.styl";', 'utf8');
+    fd = fs.openSync('./src/'+ cssExt +'/main.' + cssExt, 'a');
+    fs.appendFileSync(fd, '\n@import "../components/'+ fName +'/'+ fName +'.' + cssExt + ';', 'utf8');
   } catch (err) {
     console.log(err);
   } finally {

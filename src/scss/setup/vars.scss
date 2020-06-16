@@ -1,0 +1,64 @@
+//- COLORS
+$bgColor: #fff;
+$color: #000;
+
+
+//- FONT
+$font: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+
+
+//- GRID
+$gridPadding: 15px;
+$containerWidth: 1170px;
+$containerPadding: 15px;
+
+
+//- BREAKPOINTS
+$note: 'max-width: 1759px';
+$laptop: 'max-width: 1399px';
+$tablet: 'max-width: 1279px';
+$pad: 'max-width: 1023px';
+$phone: 'max-width: 767px';
+
+
+@mixin note {
+  @media all and ($note) { @content; }
+}
+
+@mixin laptop {
+  @media all and ($laptop) { @content; }
+}
+
+@mixin tablet {
+  @media all and ($tablet) { @content; }
+}
+
+@mixin pad {
+  @media all and ($pad) { @content; }
+}
+
+@mixin phone {
+  @media all and ($phone) { @content; }
+}
+
+
+/*
+  BREAKPOINTS
+
+  iPad Pro - 1366, 1024
+  macbook old = 1280
+  iPad - 1024, 768
+  iPhone - 414, 375, 320
+
+  note = 'all and (max-width: 1759px)'
+  laptop = 'all and (max-width: 1399px)'
+  tablet = 'all and (max-width: 1279px)'
+  pad = 'all and (max-width: 1023px)'
+  phone = 'all and (max-width: 767px)'
+*/
+
+
+/*
+  FONTS
+  ===============================================
+*/

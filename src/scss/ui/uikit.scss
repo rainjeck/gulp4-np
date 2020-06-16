@@ -1,0 +1,98 @@
+/*!
+  GRID
+  ===============================================
+  */
+.rw {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 0 (-($gridPadding));
+}
+
+
+.cl {
+  width: 100%;
+  padding: 0 $gridPadding;
+}
+
+
+@mixin cl($num, $columns) {
+  max-width: (100% / $columns) * $num;
+}
+
+
+@mixin col($num, $columns) {
+  width: 100%;
+  max-width: (100% / $columns) * $num;
+}
+
+
+@mixin grid($columns, $prefix: '') {
+  @for $col from 1 through $columns {
+    .cl#{$prefix}-#{$col} {
+      max-width: (100% / $columns) * $col;
+    }
+  }
+}
+
+
+// @include grid(12);
+
+// /*! --- Note --- */
+// @media all and ($note) {
+//   @include grid(12, '-nt');
+// }
+
+// /*! --- Laptop --- */
+// @media all and ($laptop) {
+//   @include grid(12, '-lp');
+// }
+
+// /*! --- Tablet --- */
+// @media all and ($tablet) {
+//   @include grid(12, '-tb');
+// }
+
+// /*! --- Pad --- */
+// @media all and ($pad) {
+//   @include grid(12, '-pd');
+// }
+
+// /*! --- Phone --- */
+// @media all and ($phone) {
+//   @include grid(12, '-ph');
+// }
+
+
+/*!
+  UI
+  ===============================================
+*/
+
+body {
+  font-family: $font;
+  color: $color;
+}
+
+.container {
+  width: 100%;
+  max-width: $containerWidth;
+  padding: 0 $containerPadding;
+  margin: 0 auto;
+}
+
+
+.link {
+  @include transit;
+
+  &:hover {
+    opacity: 0.6;
+  }
+}
+
+
+.button, .input {
+  display: block;
+  width: 100%;
+}

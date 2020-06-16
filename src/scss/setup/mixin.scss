@@ -1,0 +1,43 @@
+// TRANSITION
+@mixin transit($duration: 0.32s) {
+  transition: all $duration linear;
+}
+
+
+// TEXT TRUNCATE
+@mixin trunc($lines) {
+  display: box;
+  display: -ms-box;
+  display: -webkit-box;
+  display: -moz-box;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  -webkit-line-clamp: $lines;
+  box-orient: vertical;
+  -moz-box-orient: vertical;
+  -webkit-box-orient: vertical;
+  -ms-box-orient: vertical;
+}
+
+
+// PSEUDO ELEMENTS
+@mixin pseudo() {
+  content: '';
+  display: block;
+  position: absolute;
+}
+
+
+//- BACKGROUD
+@mixin bg($position, $size) {
+  background-repeat: no-repeat;
+  background-position: $position;
+  background-size: $size;
+}
+
+
+// SIZE
+@mixin size($wsize, $hsize) {
+  width: $wsize;
+  height: $hsize;
+}

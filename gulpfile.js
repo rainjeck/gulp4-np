@@ -7,6 +7,8 @@ var webpack = require('webpack-stream');
 
 var destAssetsDir = "dest/assets";
 
+var cssExt = 'styl'; // 'styl' or 'scss'
+
 
 var libsCss = [
   "./node_modules/modern-css-reset/dist/reset.css"
@@ -45,14 +47,17 @@ gulp.task("pug", function() {
 
 // --- CSS
 gulp.task("css-app", function() {
-  return gulp.src([ "src/stylus/main.styl" ])
+  return gulp.src([ "src/"+ cssExt +"/main." + cssExt ])
     .pipe( plugin.sourcemaps.init() )
     .pipe( plugin.stylus()
       .on("error", plugin.notify.onError("** STYLUS **: <%= error.message %>"))
     )
-    .pipe( plugin.autoprefixer({ remove: false, cascade: false }) )
-    .pipe( plugin.sourcemaps.write("../css") )
-    .pipe( gulp.dest(destAssetsDir + "/css") )
+    // .pipe( plugin.sass({ outputStyle: 'expanded' })
+    //   .on('error', plugin.notify.onError("*** SCSS *** <%= error.message %>") )
+    // )
+  .pipe( plugin.autoprefixer({ remove: false, cascade: false }) )
+  .pipe( plugin.sourcemaps.write("../css") )
+  .pipe( gulp.dest(destAssetsDir + "/css") )
 });
 
 gulp.task("css-minify", function() {
@@ -188,11 +193,18 @@ gulp.task("del", function(done) {
 
 // --- WATCH
 gulp.task("watch", function() {
-  browserSync.init({ server: { baseDir: "dest" }, open: false });
+  browserSync.init({
+    server: { baseDir: "dest" },
+    open: false,
+    ghostMode: false,
+    logFileChanges: false,
+    localOnly: true,
+    timestamps: false
+  });
 
   gulp.watch("src/**/*.pug", gulp.series("pug", "watcher"));
   gulp.watch("src/**/*.js", gulp.series("js", "watcher"));
-  gulp.watch("src/**/*.styl", gulp.series("css", "watcher"));
+  gulp.watch("src/**/*." + cssExt, gulp.series("css", "watcher"));
 });
 
 
