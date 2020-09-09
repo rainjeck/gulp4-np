@@ -12,6 +12,11 @@ html {
 
 html {
   font-size: 16px;
+
+  &.is-no-scroll,
+  &.is-unimodal-active {
+    overflow: hidden
+  }
 }
 
 

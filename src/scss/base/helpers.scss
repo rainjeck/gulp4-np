@@ -3,14 +3,21 @@
   ===============================================
 */
 
+.icon, .ico {
+  display: inline-block;
+}
+
+
 .hide {
   display: none;
 }
+
 
 .img {
   display: block;
   max-width: 100%;
 }
+
 
 picture {
   display: block;
@@ -19,6 +26,7 @@ picture {
     width: 100%;
   }
 }
+
 
 .tab {
   display: none;
@@ -40,6 +48,7 @@ picture {
     opacity: 1;
   }
 }
+
 
 .iframe-container {
   overflow: hidden;
