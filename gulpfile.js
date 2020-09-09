@@ -80,8 +80,8 @@ gulp.task("css-minify", function() {
 
 gulp.task("css-bundle", function() {
   return gulp.src([
-    destAssetsDir + '/css/**/libs.min.css',
-    destAssetsDir + 'css/**/main.min.css'
+      destAssetsDir + '/css/**/libs.min.css',
+      destAssetsDir + 'css/**/main.min.css'
     ])
     .pipe( plugin.concat("bundle.min.css") )
     .pipe( gulp.dest(destAssetsDir + "/css/") )
@@ -96,22 +96,18 @@ gulp.task("js-app", function() {
     .pipe( webpack({
       mode: 'development',
       output: { filename: 'main.js' },
+      devtool: 'source-map',
       module: {
         rules: [{
           test: /\.js$/,
-          use: { loader: 'babel-loader',
-            options: {
-              presets: [
-                ['@babel/preset-env', {
-                  useBuiltIns: 'entry',
-                  corejs: 3
-                }]
-              ]
-            }
+          use: {
+            loader: 'babel-loader',
+            options: { presets: [
+              ['@babel/preset-env', { useBuiltIns: 'entry', corejs: 3 }]
+            ]}
           }
         }]
-      },
-      devtool: 'source-map',
+      }
     }) )
     .pipe( gulp.dest(destAssetsDir + "/js") )
 });
@@ -222,7 +218,11 @@ gulp.task("watch", function() {
     timestamps: false
   });
 
-  gulp.watch("src/**/*.pug", gulp.series("pug", "inlinesvg", "watcher"));
+  gulp.watch("src/**/*.pug", gulp.series(
+    "pug",
+    // "inlinesvg",
+    "watcher"
+  ));
   gulp.watch("src/**/*.js", gulp.series("js", "watcher"));
   gulp.watch("src/**/*." + cssExt, gulp.series("css", "watcher"));
 });

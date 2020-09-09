@@ -1,0 +1,27 @@
+extends ../layout/_default
+
+block vars
+  - var title = 'UI Kit';
+  -
+    var style = `
+      p.p:not(:last-child) { margin-bottom: 1em; color: #38A169; }
+      .section { margin: 2em 0; }
+      .block { margin-bottom: 2em; }
+      .block-small { margin-bottom: 1em; }
+      .block-border-bottom { border-bottom: 1px solid #d8d8d8; padding-bottom: 1em; }
+      hr { border: 0; border-bottom: 1px solid #d8d8d8; }
+    `;
+
+block header
+
+block content
+  .section
+    .container
+      .block-small
+        a.link(href="index.html") Главная
+
+      h1 UI KIT
+
+      .section
+
+block footer

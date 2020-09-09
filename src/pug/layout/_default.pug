@@ -12,10 +12,10 @@ include components
 
 
 block vars
-
+  - var name = '';
 
 doctype html
-html(lang="ru-RU")
+html(lang="en-EN")
   head
     meta(charset="utf-8")
     meta(http-equiv='X-UA-Compatible', content="IE=edge")
@@ -30,7 +30,13 @@ html(lang="ru-RU")
     meta(name="keywords" content="")
     meta(name="description" content="")
 
-    title #{title}
+    title #{title} - #{name}
+
+    if ( style )
+      style.
+        !{style}
+    .
+      !{scripts}
 
   body
     <!--[if lte IE 9]>
