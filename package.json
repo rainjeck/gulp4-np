@@ -30,6 +30,8 @@
     "webpack-stream": "^5.2.1"
   },
   "dependencies": {
+    "@babel/polyfill": "^7.11.5",
+    "core-js": "3",
     "core-js-bundle": "^3.6.5",
     "modern-css-reset": ">=1.0.4",
     "svg4everybody": ">=2.1.9"

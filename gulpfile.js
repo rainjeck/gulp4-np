@@ -44,6 +44,17 @@ gulp.task("pug", function() {
     .pipe( gulp.dest("dest") );
 });
 
+// --- INLINE SVG
+gulp.task("inlinesvg", function() {
+  return gulp.src('./dest/*.html')
+    .pipe( plugin.embedSvg({
+      selectors: ['svg[src$=".svg"]'],
+      root: './dest',
+      attrs: /class/
+    }) ).on( "error", plugin.notify.onError("<%= error.message %>") )
+    .pipe( gulp.dest("dest") );
+});
+
 
 // --- CSS
 gulp.task("css-app", function() {
@@ -52,7 +63,7 @@ gulp.task("css-app", function() {
     .pipe( plugin.stylus()
       .on("error", plugin.notify.onError("** STYLUS **: <%= error.message %>"))
     )
-    // .pipe( plugin.sass({ outputStyle: 'expanded' })
+    // .pipe( plugin.sass({ outputStyle: 'expanded', precision: 4 })
     //   .on('error', plugin.notify.onError("*** SCSS *** <%= error.message %>") )
     // )
   .pipe( plugin.autoprefixer({ remove: false, cascade: false }) )
@@ -88,7 +99,16 @@ gulp.task("js-app", function() {
       module: {
         rules: [{
           test: /\.js$/,
-          use: { loader: 'babel-loader', options: { presets: ['@babel/preset-env'] } }
+          use: { loader: 'babel-loader',
+            options: {
+              presets: [
+                ['@babel/preset-env', {
+                  useBuiltIns: 'entry',
+                  corejs: 3
+                }]
+              ]
+            }
+          }
         }]
       },
       devtool: 'source-map',
@@ -202,7 +222,7 @@ gulp.task("watch", function() {
     timestamps: false
   });
 
-  gulp.watch("src/**/*.pug", gulp.series("pug", "watcher"));
+  gulp.watch("src/**/*.pug", gulp.series("pug", "inlinesvg", "watcher"));
   gulp.watch("src/**/*.js", gulp.series("js", "watcher"));
   gulp.watch("src/**/*." + cssExt, gulp.series("css", "watcher"));
 });
@@ -211,10 +231,11 @@ gulp.task("watch", function() {
 gulp.task("build", gulp.series(
     "assets",
     "svg",
+    "pug",
+    // "inlinesvg",
     "libs",
     "css",
-    "js",
-    "pug"
+    "js"
   ),
   function () {}
 );
