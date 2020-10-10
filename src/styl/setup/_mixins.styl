@@ -36,3 +36,19 @@ bg($position, $size)
 size($wsize, $hsize)
   width: $wsize
   height: $hsize
+
+
+//- GRID
+cl($num, $columns)
+  max-width: floor( ((100% / $columns) * $num), 2 )
+
+
+col($num, $columns)
+  width: 100%
+  max-width: floor( ((100% / $columns) * $num), 2 )
+
+
+grid($columns, $prefix = '')
+  for $col in 1..$columns
+    .cl{$prefix}-{$col}
+      max-width floor( ((100% / $columns) * $col), 6 )

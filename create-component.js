@@ -36,17 +36,17 @@ function createComponent() {
 
   // Add pug file
   try {
-    fs.appendFileSync(path + '/' + fName + '.pug', 'mixin '+ fName +'()\n\t.new\n\t\tp ' + fName);
+    fs.appendFileSync(path + '/' + fName +'.pug', 'mixin '+ fName +'()\n\t.new\n\t\tp '+ fName);
   } catch (err) {
     console.log(err);
   }
 
   let fd;
 
-  // Push @import to main.styl
+  // Push @import to main
   try {
     fd = fs.openSync('./src/'+ cssExt +'/main.' + cssExt, 'a');
-    fs.appendFileSync(fd, '\n@import "../components/'+ fName +'/'+ fName +'.' + cssExt + ';', 'utf8');
+    fs.appendFileSync(fd, '\n@import "../components/'+ fName +'/'+ fName +'";', 'utf8');
   } catch (err) {
     console.log(err);
   } finally {

@@ -12,6 +12,10 @@ body, html
 html
   font-size: 16px
 
+  &.is-no-scroll,
+  &.is-unimodal-active
+    overflow: hidden
+
 
 body
   font-weight: normal
@@ -20,6 +24,7 @@ body
   overflow: hidden
   display: flex
   min-height: 100vh
+  scroll-behavior: auto
 
 
 .browsehappy
@@ -99,6 +104,7 @@ input[type="search"],
 input[type="number"]
   -webkit-appearance: textfield
 
+
 /* clears the 'X' from Internet Explorer */
 input[type=search]
   &::-ms-clear,
@@ -141,7 +147,7 @@ fieldset
 
 select.select,
 .select select
-    appearance: none
+  appearance: none
 
-    &::-ms-expand
-      display: none
+  &::-ms-expand
+    display: none

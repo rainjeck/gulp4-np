@@ -41,3 +41,24 @@
   width: $wsize;
   height: $hsize;
 }
+
+
+// GRID
+@mixin cl($num, $columns) {
+  max-width: (100% / $columns) * $num;
+}
+
+
+@mixin col($num, $columns) {
+  width: 100%;
+  max-width: (100% / $columns) * $num;
+}
+
+
+@mixin grid($columns, $prefix: '') {
+  @for $col from 1 through $columns {
+    .cl#{$prefix}-#{$col} {
+      max-width: (100% / $columns) * $col;
+    }
+  }
+}
