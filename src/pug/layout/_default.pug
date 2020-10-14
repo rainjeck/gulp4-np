@@ -1,3 +1,5 @@
+- var name = '';
+
 - var IMGPATH = "assets/images/";
 - var ICOPATH = "assets/icons/";
 
@@ -9,15 +11,13 @@ mixin svg-color(iconName)
 
 
 include components
-
-
 block vars
-  - var name = '';
 
 doctype html
-html(lang="en-EN")
+html(lang="en")
   head
     meta(charset="utf-8")
+    meta(http-equiv="content-type" content="text/html")
     meta(http-equiv='X-UA-Compatible', content="IE=edge")
     meta(name="SKYPE_TOOLBAR" content="SKYPE_TOOLBAR_PARSER_COMPATIBLE")
     meta(name="format-detection" content="telephone=no")
@@ -27,7 +27,6 @@ html(lang="en-EN")
     link(rel="stylesheet" type='text/css' href="assets/css/libs.min.css")
     link(rel="stylesheet" type='text/css' href="assets/css/main.css")
 
-    meta(name="keywords" content="")
     meta(name="description" content="")
 
     title #{title} - #{name}
