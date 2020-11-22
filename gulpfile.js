@@ -112,6 +112,27 @@ gulp.task("js-app", function() {
     .pipe( gulp.dest(destAssetsDir + "/js") )
 });
 
+gulp.task("js-libs", function() {
+  return gulp.src( './src/js/libs.js' )
+    .pipe( webpack({
+      mode: 'production',
+      output: { filename: 'libs.min.js' },
+      // devtool: 'source-map',
+      module: {
+        rules: [{
+          test: /\.js$/,
+          use: {
+            loader: 'babel-loader',
+            options: { presets: [
+              ['@babel/preset-env', { useBuiltIns: 'entry', corejs: 3 }]
+            ]}
+          }
+        }]
+      }
+    }) )
+    .pipe( gulp.dest(destAssetsDir + "/js") )
+});
+
 gulp.task("js-minify", function() {
   return gulp.src([ destAssetsDir + "/js/main.js" ])
     .pipe( plugin.concat("main.min.js") )
@@ -141,12 +162,12 @@ gulp.task("copy-libs", function() {
     .pipe( gulp.dest(destAssetsDir + "/libs/modules") );
 });
 
-gulp.task("libs-js", function() {
-  return gulp.src( allJs )
-    .pipe( plugin.concat("libs.min.js") )
-    .pipe( plugin.uglify() )
-    .pipe( gulp.dest(destAssetsDir + "/js") );
-});
+// gulp.task("libs-js", function() {
+//   return gulp.src( allJs )
+//     .pipe( plugin.concat("libs.min.js") )
+//     .pipe( plugin.uglify() )
+//     .pipe( gulp.dest(destAssetsDir + "/js") );
+// });
 
 gulp.task("libs-css", function() {
   return gulp.src( allCss )
@@ -157,7 +178,7 @@ gulp.task("libs-css", function() {
     .pipe( gulp.dest(destAssetsDir + "/css") );
 });
 
-gulp.task("libs", gulp.series( "copy-libs", "libs-js", "libs-css" ));
+gulp.task("libs", gulp.series( "copy-libs", "js-libs", "libs-css" ));
 
 
 // Assets
@@ -223,7 +244,8 @@ gulp.task("watch", function() {
     // "inlinesvg",
     "watcher"
   ));
-  gulp.watch("src/**/*.js", gulp.series("js", "watcher"));
+  gulp.watch("src/js/modules/**/*.js", gulp.series("js", "watcher"));
+  gulp.watch("src/js/libs.js", gulp.series("js-libs", "watcher"));
   gulp.watch("src/**/*." + cssExt, gulp.series("css", "watcher"));
 });
 
