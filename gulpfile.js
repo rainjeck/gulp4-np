@@ -117,7 +117,6 @@ gulp.task("js-libs", function() {
     .pipe( webpack({
       mode: 'production',
       output: { filename: 'libs.min.js' },
-      // devtool: 'source-map',
       module: {
         rules: [{
           test: /\.js$/,
@@ -161,13 +160,6 @@ gulp.task("copy-libs", function() {
   return gulp.src( libs )
     .pipe( gulp.dest(destAssetsDir + "/libs/modules") );
 });
-
-// gulp.task("libs-js", function() {
-//   return gulp.src( allJs )
-//     .pipe( plugin.concat("libs.min.js") )
-//     .pipe( plugin.uglify() )
-//     .pipe( gulp.dest(destAssetsDir + "/js") );
-// });
 
 gulp.task("libs-css", function() {
   return gulp.src( allCss )
