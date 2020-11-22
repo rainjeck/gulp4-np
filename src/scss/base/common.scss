@@ -178,3 +178,11 @@ select.select,
     display: none;
   }
 }
+
+
+ul[class],
+ol[class] {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}

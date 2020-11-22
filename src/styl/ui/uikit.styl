@@ -120,12 +120,13 @@ picture
 
 //! Display
 uidisplay($prefix = '')
-  for $one in flex inline-flex block inline-block inline
+  for $one in block inline-block inline
     .ui-d-{$one}{$prefix}
       display: $one
 
   for $one in flex inline-flex
     .ui-d-{$one}{$prefix}
+      display: $one
       flex-wrap: wrap
 
   for $one in left center right

@@ -2,7 +2,7 @@
   GRID
   ===============================================
   */
-.rw {
+.ui-row {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -11,13 +11,15 @@
 }
 
 
-.cl {
+.ui-col {
   width: 100%;
   padding: 0 $gridPadding;
 }
 
 
-// @include grid(12);
+@include grid(12);
+
+
 
 // /*! --- Note --- */
 // @media all and ($note) {
@@ -87,7 +89,6 @@ body {
   display: none;
 }
 
-
 .img {
   display: block;
   max-width: 100%;
@@ -153,5 +154,60 @@ picture {
     position: absolute;
     top: 0;
     width: 100%;
+  }
+}
+
+
+/*
+  --- DISPLAY -------------------------
+*/
+@mixin uidisplay($prefix: '') {
+
+  @each $one in block, inline-block, inline {
+    .ui-d-#{$one}#{$prefix} {
+      display: $one;
+    }
+  }
+
+  @each $one in flex, inline-flex {
+    .ui-d-#{$one}#{$prefix} {
+      display: $one;
+      flex-wrap: wrap;
+    }
+  }
+
+  @each $one in left center right {
+    .ui-text-#{$one}#{$prefix} {
+      text-align: $one;
+    }
+  }
+
+  @each $one in flex-start, flex-end, center {
+    .ui-alignitems-#{$one}#{$prefix} {
+      align-items: $one;
+    }
+    .ui-justify-#{$one}#{$prefix} {
+      justify-content: $one;
+    }
+  }
+
+  @each $one in space-between, space-around {
+    .ui-justify-#{$one}#{$prefix} {
+      justify-content: $one;
+    }
+  }
+
+  @each $one in row, row-reverse, column, column-reverse {
+    .ui-flexdir-#{$one}#{$prefix} {
+      flex-direction: $one;
+    }
+  }
+}
+
+@include uidisplay();
+
+@each $pointName, $pointValue in $points {
+  @media #{$pointValue} {
+    @include uidisplay($pointName);
   }
 }

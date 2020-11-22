@@ -7,7 +7,7 @@ var webpack = require('webpack-stream');
 
 var destAssetsDir = "dest/assets";
 
-var cssExt = 'styl'; // 'styl' or 'scss'
+var cssExt = 'scss'; // 'styl' or 'scss'
 
 
 var libsCss = [
@@ -60,12 +60,12 @@ gulp.task("inlinesvg", function() {
 gulp.task("css-app", function() {
   return gulp.src([ "src/"+ cssExt +"/main." + cssExt ])
     .pipe( plugin.sourcemaps.init() )
-    .pipe( plugin.stylus()
-      .on("error", plugin.notify.onError("** STYLUS **: <%= error.message %>"))
-    )
-    // .pipe( plugin.sass({ outputStyle: 'expanded', precision: 4 })
-    //   .on('error', plugin.notify.onError("*** SCSS *** <%= error.message %>") )
+    // .pipe( plugin.stylus()
+    //   .on("error", plugin.notify.onError("<%= error.message %>"))
     // )
+    .pipe( plugin.sass({ outputStyle: 'expanded', precision: 4 })
+      .on('error', plugin.notify.onError("<%= error.message %>") )
+    )
   .pipe( plugin.autoprefixer({ remove: false, cascade: false }) )
   .pipe( plugin.sourcemaps.write("../css") )
   .pipe( gulp.dest(destAssetsDir + "/css") )
