@@ -2,7 +2,7 @@
   GRID
   ===============================================
   */
-.rw
+.ui-row
   display: flex
   flex-direction: row
   flex-wrap: wrap
@@ -10,27 +10,16 @@
   margin: 0 (-($gridPadding))
 
 
-.cl
+.ui-col
   width: 100%
   padding: 0 $gridPadding
 
 
-// grid(12)
-
-// @media note
-//   grid(12, '-nt')
-
-// @media laptop
-//   grid(12, '-lp')
-
-// @media tablet
-//   grid(12, '-tb')
-
-// @media pad
-//   grid(12, '-pd')
-
-// @media phone
-//   grid(12, '-ph')
+// grid($gridColumns)
+//
+// for one, key in $points
+//   @media one
+//     grid($gridColumns, $pointsPrefix[key])
 
 
 /*!
@@ -124,5 +113,43 @@ picture
     width: 100%
 
 
-.icon, .ico
+.icon,
+.ico
   display: inline-block
+
+
+//! Display
+uidisplay($prefix = '')
+  for $one in flex inline-flex block inline-block inline
+    .ui-d-{$one}{$prefix}
+      display: $one
+
+  for $one in flex inline-flex
+    .ui-d-{$one}{$prefix}
+      flex-wrap: wrap
+
+  for $one in left center right
+    .ui-text-{$one}{$prefix}
+      text-align: $one
+
+  for $one in flex-start flex-end center
+    .ui-alignitems-{$one}{$prefix}
+      align-items: $one
+
+    .ui-justify-{$one}{$prefix}
+      justify-content: $one
+
+  for $one in space-between space-around
+    .ui-justify-{$one}{$prefix}
+      justify-content: $one
+
+  for $one in row row-reverse column column-reverse
+    .ui-direction-{$one}{$prefix}
+      flex-direction: $one
+
+
+uidisplay()
+
+for one, key in $points
+  @media one
+    uidisplay($pointsPrefix[key])

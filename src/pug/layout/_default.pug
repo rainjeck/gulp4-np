@@ -1,3 +1,5 @@
+- var name = '';
+
 - var IMGPATH = "assets/images/";
 - var ICOPATH = "assets/icons/";
 
@@ -9,10 +11,7 @@ mixin svg-color(iconName)
 
 
 include components
-
-
 block vars
-  - var name = '';
 
 doctype html
 html(lang="en-EN")
@@ -27,7 +26,6 @@ html(lang="en-EN")
     link(rel="stylesheet" type='text/css' href="assets/css/libs.min.css")
     link(rel="stylesheet" type='text/css' href="assets/css/main.css")
 
-    meta(name="keywords" content="")
     meta(name="description" content="")
 
     title #{title} - #{name}
