@@ -2,7 +2,7 @@
 
 const fs = require('fs');
 
-const cssExt = 'styl'; // 'styl' or 'scss'
+const cssExt = 'scss'; // 'styl' or 'scss'
 
 function createComponent() {
   const componentName = process.argv.slice(2);
@@ -19,26 +19,46 @@ function createComponent() {
   // Check folder
   if ( fs.existsSync(path) ) {
     console.log('ERROR: Folder "src/components/' + fName + '" exists');
-    return;
+  } else {
+    // Create Dir
+    fs.mkdirSync(path, {recursive: true}, (err) => {
+      if (err) throw err;
+    });
   }
 
-  // Create Dir
-  fs.mkdirSync(path, {recursive: true}, (err) => {
-    if (err) throw err;
-  });
 
-  // Add stylus file
-  try {
-    fs.appendFileSync(path + '/' + fName + '.' + cssExt, '/*!\n * --- '+ fName + '\n */');
-  } catch (err) {
-    console.log(err);
+  // Add css file
+  // Check file
+  if ( fs.existsSync(path +'/'+ fName +'.'+ cssExt) ) {
+    console.log('ERROR: File "'+ path +'/'+ fName +'.'+ cssExt +'" exists');
+  } else {
+    // Create css file
+    try {
+      fs.appendFileSync(
+        path + '/' + fName + '.' + cssExt,
+        '/*!\n * --- '+ fName + '\n */'
+      );
+    } catch (err) {
+      console.log(err);
+    }
   }
+
 
   // Add pug file
-  try {
-    fs.appendFileSync(path + '/' + fName +'.pug', 'mixin '+ fName +'()\n\t.new\n\t\tp '+ fName);
-  } catch (err) {
-    console.log(err);
+  // Check file
+  if ( fs.existsSync(path + '/' + fName +'.pug') ) {
+    console.log('ERROR: File "'+ path + '/' + fName +'.pug" exists');
+    return;
+  } else {
+    // Create pug file
+    try {
+      fs.appendFileSync(
+        path + '/' + fName +'.pug',
+        "mixin "+ fName +"()\n  .new "+ fName
+      );
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   let fd;
@@ -55,7 +75,6 @@ function createComponent() {
   }
 
   // Push include to components.pug
-
   try {
     fd = fs.openSync('./src/pug/layout/components.pug', 'a');
     fs.appendFileSync(fd, '\ninclude ../../components/'+ fName +'/'+ fName, 'utf8');

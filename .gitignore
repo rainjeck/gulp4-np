@@ -2,3 +2,9 @@
 /dest
 package-lock.json
 yarn.lock
+.yarn/*
+!.yarn/cache
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions

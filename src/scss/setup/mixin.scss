@@ -43,6 +43,7 @@
 }
 
 
+
 // GRID
 @mixin cl($num, $columns) {
   max-width: (100% / $columns) * $num;
@@ -56,6 +57,7 @@
 
 
 @mixin grid($columns) {
+
   @for $col from 1 through $columns {
     .ui-col-#{$col} {
       max-width: (100% / $columns) * $col;

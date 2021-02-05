@@ -34,12 +34,12 @@ class Form {
 
     document.addEventListener('bouncerRemoveError', e => {
       var field = e.target;
-      field.classList.add('valid');
+      field.classList.add('is-valid');
     }, false);
 
     document.addEventListener('bouncerShowError', e => {
       var field = e.target;
-      field.classList.remove('valid');
+      field.classList.remove('is-valid');
     }, false);
   }
 
@@ -50,11 +50,9 @@ class Form {
 
       const btn = form.querySelector('[type="submit"]');
 
-      const url = `${form.action}wp-admin/admin-ajax.php`;
+      const url = 'yoururl';
 
       const fd = new FormData(form);
-
-      fd.append('action', 'mail');
 
       form.classList.add('is-process');
       btn.setAttribute('disabled', true);

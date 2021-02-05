@@ -15,14 +15,12 @@ html {
 
   &.is-no-scroll,
   &.is-unimodal-active {
-    overflow: hidden
+    overflow: hidden;
   }
 }
 
 
 body {
-  font-family: $font;
-  color: #000;
   font-weight: normal;
   background-color: $bgColor;
   line-height: normal;
