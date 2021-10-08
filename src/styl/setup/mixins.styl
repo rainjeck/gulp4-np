@@ -1,0 +1,45 @@
+//- TEXT TRUNCATE
+trunc($lines)
+  display: box
+  display: -ms-box
+  display: -webkit-box
+  display: -moz-box
+  text-overflow: ellipsis
+  overflow: hidden
+  -webkit-line-clamp: $lines
+  box-orient: vertical
+  -moz-box-orient: vertical
+  -webkit-box-orient: vertical
+  -ms-box-orient: vertical
+
+truncno()
+  -webkit-line-clamp: none;
+  display: block;
+  text-overflow: clip;
+  overflow: visible;
+  min-height: auto;
+
+
+//- TRANSITION
+transit($duration = 0.32s)
+  transition: all $duration linear
+
+
+//- PSEUDO ELEMENTS
+pseudo()
+  content: ''
+  display: block
+  position: absolute
+
+
+//- BACKGROUND
+bg($position, $size)
+  background-repeat: no-repeat
+  background-position: $position
+  background-size: $size
+
+
+//- SET SIZE
+size($wsize, $hsize)
+  width: $wsize
+  height: $hsize

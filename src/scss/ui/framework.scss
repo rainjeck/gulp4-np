@@ -1,0 +1,140 @@
+/*!
+ --- GRID ---------------------
+*/
+.ui-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 0 (-($gridPadding));
+}
+
+
+.ui-col {
+  width: 100%;
+  padding-left: $gridPadding;
+  padding-right: $gridPadding;
+}
+
+
+@include grid($gridColumns);
+
+
+/*!
+  --- FRAMEWORK ---------------------------------
+*/
+@mixin uidisplay($prefix: '') {
+
+  // Flex
+  @each $one in flex, inline-flex {
+    .ui-d-#{$one}#{$prefix} {
+      display: $one;
+      flex-wrap: wrap;
+    }
+  }
+
+  @each $one in row, row-reverse, column, column-reverse {
+    .ui-flexdir-#{$one}#{$prefix} {
+      flex-direction: $one;
+    }
+  }
+
+  .ui-flex-nowrap#{$prefix} {
+    flex-wrap: nowrap;
+  }
+
+  .ui-flexgrow-1#{$prefix} {
+    flex-grow: 1;
+  }
+
+  // Display
+  @each $one in block, inline-block, inline, none {
+    .ui-d-#{$one}#{$prefix} {
+      display: $one;
+    }
+  }
+
+  @each $one in visible, hidden {
+    .ui-d-#{$one}#{$prefix} {
+      visibility: #{$one};
+    }
+  }
+
+  // Align
+  @each $one in left center right {
+    .ui-ta-#{$one}#{$prefix} {
+      text-align: $one;
+    }
+  }
+
+  @each $one in flex-start, flex-end, center {
+    .ui-ai-#{$one}#{$prefix} {
+      align-items: $one;
+    }
+    .ui-as-#{$one}#{$prefix} {
+      align-self: #{$one};
+    }
+    .ui-jc-#{$one}#{$prefix} {
+      justify-content: $one;
+    }
+  }
+
+  @each $one in space-between, space-around {
+    .ui-jc-#{$one}#{$prefix} {
+      justify-content: $one;
+    }
+  }
+
+  // Width
+  .ui-w-100#{$prefix} {
+    width: 100%;
+  }
+
+  .ui-w-auto#{$prefix} {
+    width: auto;
+  }
+
+  // Margin
+  @each $one in left, right {
+    .ui-mx-auto-#{$one}#{$prefix} {
+      margin-#{$one}: auto;
+    }
+  }
+
+  .ui-mx-auto#{$prefix} {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .ui-mx-none#{$prefix} {
+    margin-left: initial;
+    margin-right: initial;
+  }
+
+  .ui-mx-0#{$prefix} {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  // Padding
+  .ui-px-0#{$prefix} {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .ui-nowrap#{$prefix} {
+    white-space: nowrap;
+  }
+
+  .ui-wrap#{$prefix} {
+    white-space: normal;
+  }
+}
+
+@include uidisplay();
+
+@each $pointName, $pointValue in $points {
+  @media #{$pointValue} {
+    @include uidisplay($pointName);
+  }
+}

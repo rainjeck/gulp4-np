@@ -1,0 +1,228 @@
+/*!
+  UI
+  ===============================================
+*/
+
+body {
+  font-family: $font;
+  color: $colorText;
+}
+
+
+.container {
+  width: 100%;
+  max-width: $containerWidth;
+  padding: 0 $containerPadding;
+  margin: 0 auto;
+}
+
+
+
+.link {
+  @include transit();
+
+  &:hover {
+    opacity: 0.6;
+  }
+}
+
+
+.is-process {
+  position: relative;
+
+  &:before {
+    @include pseudo();
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(#fff,0.5);
+    z-index: 10;
+  }
+
+  &:after {
+    @include pseudo();
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    top: 50%;
+    left: 50%;
+    margin-top: -20px;
+    margin-left: -20px;
+    border-width: 5px;
+    border-color: $colorAccent rgba(#fff,0);
+    border-style: solid;
+    animation: process-rotate 1s ease-in-out infinite forwards;
+    z-index: 15;
+  }
+}
+
+@keyframes process-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@import 'framework';
+
+
+/*!
+  --- ELEMENTS ------------------------
+*/
+
+.ui-icon {
+  @include size(16px,16px);
+  flex: none;
+
+  .ico {
+    @include size(100%,100%);
+  }
+}
+
+
+.ui-pic-bg {
+  position: absolute;
+  @include size(100%,100%);
+  top: 0;
+  left: 0;
+
+  img {
+    @include size(100%,100%);
+    object-fit: cover;
+  }
+}
+
+
+.ui-pic-cover{
+  img {
+    @include size(100%,100%);
+    object-fit: cover;
+  }
+}
+
+
+.ui-tab {
+  display: none;
+  opacity: 0;
+
+  &.is-active {
+    display: block;
+    animation: tab-show 1s linear 0.01s 1 forwards;
+  }
+}
+
+@keyframes tab-show {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+
+.ui-iframe-box{
+  overflow: hidden;
+  padding-top: 56.25%;
+  position: relative;
+  width: 100%;
+
+  iframe {
+    border: 0;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+}
+
+.ui-ul-clear {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+
+
+/*!
+  --- FORM ----------------------------
+*/
+.ui-fg {
+  position: relative;
+  margin-bottom: 1em;
+
+  &.is-mb-0 {
+    margin-bottom: 0
+  }
+
+  .error-message {
+    position: absolute;
+    bottom: 3px;
+    right: 5px;
+    font-size: 0.8em;
+    color: $colorError;
+  }
+}
+
+
+/*!
+  --- UI CUSTOM ---------------------------------
+*/
+
+.ui-burger{
+  @include size(32px,24px);
+  position: relative;
+
+  &:before,
+  &:after {
+    @include pseudo();
+  }
+
+  &:before,
+  &:after,
+  span {
+    width: 100%;
+    height: 4px;
+    left: 0;
+    background: red;
+    border-radius: 10px;
+    @include transit();
+  }
+
+  &:before {
+    top: 0;
+  }
+
+  &:after {
+    top: 100%;
+    margin-top: -4px;
+  }
+
+  span {
+    top: 50%;
+    margin-top: 0;
+  }
+
+  &.is-active {
+    span {
+      opacity: 0;
+    }
+
+    &:before,
+    &:after {
+      top: 50%;
+      margin-top: -2px;
+    }
+
+    &:before {
+      transform: rotate(45deg);
+    }
+
+    &:after {
+      transform: rotate(-45deg);
+    }
+  }
+}

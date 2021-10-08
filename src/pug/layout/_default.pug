@@ -1,0 +1,70 @@
+- var name = '';
+
+- var IMGPATH = "assets/images/";
+- var ICOPATH = "assets/icons/";
+
+mixin svg(iconName)
+  svg(class= attributes.class): use(xlink:href=ICOPATH + 'sprite.svg#' + iconName)
+
+mixin svg-color(iconName)
+  svg(class= attributes.class): use(xlink:href=ICOPATH + 'sprite-color.svg#' + iconName)
+
+
+include components
+block vars
+
+doctype html
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    meta(http-equiv="content-type" content="text/html")
+    meta(http-equiv='X-UA-Compatible', content="IE=edge")
+    meta(name="SKYPE_TOOLBAR" content="SKYPE_TOOLBAR_PARSER_COMPATIBLE")
+    meta(name="format-detection" content="telephone=no")
+    meta(name="viewport" content="width=device-width, initial-scale=1, user-scalable=no")
+
+    link(rel="preload" href="assets/css/libs.min.css" as="style")
+    link(rel="preload" href="assets/css/main.css" as="style")
+
+    link(rel="preload" href="assets/js/libs.min.js" as="script")
+    link(rel="preload" href="assets/js/main.js" as="script")
+
+    link(rel="stylesheet" type='text/css' href="assets/css/libs.min.css")
+    link(rel="stylesheet" type='text/css' href="assets/css/main.css")
+
+    meta(name="description" content="")
+
+    title #{title} - #{name}
+
+    if ( style )
+      style.
+        !{style}
+    .
+      !{scripts}
+
+  body
+    <!--[if lte IE 9]>
+    p.browsehappy Вы используете #[strong устаревший] браузер. Пожалуйста #[a(href="http://browsehappy.com/", target="_blank") обновите ваш браузер] чтобы воспользоваться всем функционалом сайта.
+    <![endif]-->
+
+    // WRAPPER
+    .wrapper
+
+      // HEADER
+      block header
+      // end .HEADER
+
+      // MAIN
+      main.main
+        block content
+      // end .MAIN
+
+      // FOOTER
+      block footer
+      // end .FOOTER
+
+      block modals
+    // end .WRAPPER
+
+    script(src="assets/js/libs.min.js")
+    script(src="assets/js/main.js")

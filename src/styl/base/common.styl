@@ -1,0 +1,165 @@
+/*!
+  BASE
+  ===============================================
+  */
+
+body, html
+  border: 0;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+
+
+html
+  font-size: 16px;
+
+  &.is-no-scroll,
+  &.is-unimodal-active
+    overflow: hidden;
+
+
+body
+  font-weight: normal;
+  background-color: #fff;
+  line-height: normal;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  min-height: 100vh;
+  scroll-behavior: auto;
+
+
+.browsehappy
+  display: block;
+  margin: 0;
+  padding: 30px;
+  text-align: center;
+  background: #e55454;
+  color: #fff;
+  font-size: 18px;
+  line-height: 1.4;
+
+  a,
+  a:hover
+    color: #fff;
+    text-decoration: underline;
+
+
+/*!
+  FOOTER TO BOTTOM
+  ===============================================
+  */
+.wrapper
+  flex: 1 1 auto;
+  width: 100%;
+  min-height: 1vh;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+
+
+.main
+  flex: 1 1 auto;
+  min-height: 1vh;
+
+
+.header, .footer
+  flex-shrink: 0;
+
+
+/*!
+  UI ELEMENTS
+  ===============================================
+  */
+a
+  font-size: inherit;
+  font-family: inherit;
+  text-decoration: none;
+  color: inherit;
+  transit();
+
+
+strong, b
+  font-weight: bold;
+
+
+button, input, select, textarea
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  width: auto;
+  outline: none;
+  line-height: 1;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  background-color: rgba(255,255,255,0);
+  transit();
+
+
+button,
+button[type="submit"],
+input[type="submit"]
+  cursor: pointer;
+
+
+input[type="search"],
+input[type="number"]
+  -webkit-appearance: textfield;
+
+
+/* clears the 'X' from Internet Explorer */
+input[type="search"]
+  &::-ms-clear,
+  &::-ms-reveal
+    display: none;
+    width: 0;
+    height: 0;
+
+/* clears the 'X' from Chrome */
+input[type="search"]
+  &::-webkit-search-decoration,
+  &::-webkit-search-cancel-button,
+  &::-webkit-search-results-button,
+  &::-webkit-search-results-decoration
+    display: none;
+
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button
+  -webkit-appearance: none;
+  margin: 0;
+
+
+button, input, textarea
+  &:disabled
+  &.is-disabled
+    cursor: not-allowed;
+
+
+textarea
+  width: 100%;
+  resize: none;
+
+
+fieldset
+  border: none;
+  margin: 0;
+  padding: 0;
+
+
+select.select,
+.select select
+  appearance: none;
+
+  &::-ms-expand
+    display: none;
+
+
+picture
+  display: block;
+
+  img
+    width: 100%;
+    display: block;

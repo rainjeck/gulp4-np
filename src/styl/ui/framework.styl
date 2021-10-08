@@ -1,0 +1,128 @@
+/*!
+ --- GRID ---------------------
+*/
+.ui-row
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  list-style: none;
+  margin-left: (-($gridPadding));
+  margin-right: (-($gridPadding));
+
+
+.ui-col
+  width: 100%;
+  padding-left: $gridPadding;
+  padding-right: $gridPadding;
+
+
+cl($num, $columns)
+  max-width: floor( ((100% / $columns) * $num), 2 );
+
+
+col($num, $columns)
+  width: 100%;
+  max-width: floor( ((100% / $columns) * $num), 2 );
+
+
+grid($columns, $prefix = '')
+  for $col in 1..$columns
+    .ui-col-{$col}{$prefix}
+      max-width floor( ((100% / $columns) * $col), 6 );
+
+
+grid($gridColumns)
+
+for one, key in $points
+  @media one
+    grid($gridColumns, $pointsPrefix[key])
+
+
+//! Display
+uidisplay($prefix = '')
+
+  // Flex
+  for $one in flex inline-flex
+    .ui-d-{$one}{$prefix}
+      display: $one;
+      flex-wrap: wrap;
+
+  .ui-flex-nowrap{$prefix}
+    flex-wrap: nowrap;
+
+  .ui-flexgrow-1{$prefix}
+    flex-grow: 1;
+
+  // Display
+  for $one in block inline-block inline none
+    .ui-d-{$one}{$prefix}
+      display: $one;
+
+  for $one in visible hidden
+    .ui-d-{$one}{$prefix}
+      visibility: $one;
+
+  // Align
+  for $one in left center right
+    .ui-ta-{$one}{$prefix}
+      text-align: $one;
+
+  for $one in flex-start flex-end center
+    .ui-ai-{$one}{$prefix}
+      align-items: $one;
+
+    .ui-jc-{$one}{$prefix}
+      justify-content: $one;
+
+    .ui-as-{$one}{$prefix}
+      align-self: $one;
+
+  for $one in space-between space-around
+    .ui-jc-{$one}{$prefix}
+      justify-content: $one;
+
+  // Direction
+  for $one in row row-reverse column column-reverse
+    .ui-flexdir-{$one}{$prefix}
+      flex-direction: $one;
+
+  // Margin
+  .ui-mx-auto{$prefix}
+    margin-left: auto;
+    margin-right: auto;
+
+  .ui-mx-auto-left{$prefix}
+    margin-left: auto;
+    margin-right: initial;
+
+  .ui-mx-auto-right{$prefix}
+    margin-left: initial;
+    margin-right: left;
+
+  .ui-mx-none{$prefix}
+    margin-left: initial;
+    margin-right: initial;
+
+  .ui-mx-0{$prefix}
+    margin-left: 0;
+    margin-right: 0;
+
+  // Width
+  .ui-w-100{$prefix}
+    width: 100%;
+
+  .ui-w-auto{$prefix}
+    width: auto;
+    max-width: none;
+
+  // Padding
+  .ui-px-0{$prefix}
+    padding-left: 0;
+    padding-right: 0;
+
+
+uidisplay()
+
+for one, key in $points
+  @media one
+    uidisplay($pointsPrefix[key])

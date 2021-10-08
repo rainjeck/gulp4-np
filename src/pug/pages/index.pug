@@ -1,0 +1,25 @@
+extends ../layout/_default
+
+block vars
+  - var title = 'Главная';
+  -
+    var style = `
+      .nav-index { padding: 2em 0; }
+      ul { margin: 2em 0; }
+      ul li { margin-bottom: 0.3em; }
+    `;
+
+block header
+
+block content
+  .nav-index
+    .container
+      h1 Навигатор
+
+      ul
+        li: a.link(href="uikit.html") UI Kit
+
+      ul
+        li: a.link(href="main.html") Main
+
+block footer

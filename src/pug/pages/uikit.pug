@@ -1,0 +1,33 @@
+extends ../layout/_default
+
+block vars
+  - var title = 'UI Kit';
+  -
+    var style = `
+      p.p:not(:last-child) { margin-bottom: 1em; color: #38A169; }
+      .section { margin: 2em 0; }
+      .mb2 { margin-bottom: 2em; }
+      .mb1 { margin-bottom: 1em; }
+      .block-border-bottom { border-bottom: 1px solid #d8d8d8; padding-bottom: 1em; }
+      hr { border: 0; border-bottom: 1px solid #d8d8d8; }
+    `;
+
+block header
+
+block content
+  .section
+    .container
+      .mb1
+        a.link(href="index.html") Главная
+
+      h1 UI KIT
+
+      .section
+        p.p Grid
+        .ui-row
+          each i in [1,2,3,4,5,6,7,8,9,10,11,12]
+            .ui-col.ui-col-1.ui-col-3-tb.ui-col-6-pd.ui-col-12-ph
+              div.ui-text-center(style="background:#eee;") col-1
+
+
+block footer
