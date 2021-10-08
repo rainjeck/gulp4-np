@@ -68,7 +68,7 @@
 
   @for $col from 1 through $columns {
     .ui-col-#{$col} {
-      max-width: (100% / $columns) * $col;
+      max-width: (math.div(100%,$columns)) * $col;
     }
   }
 
@@ -76,7 +76,7 @@
     @media #{$pointValue} {
       @for $col from 1 through $columns {
         .ui-col-#{$col}#{$pointName} {
-          max-width: (100% / $columns) * $col;
+          max-width: (math.div(100%,$columns)) * $col;
         }
       }
     }
