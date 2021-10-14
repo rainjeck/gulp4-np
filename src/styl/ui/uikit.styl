@@ -3,9 +3,9 @@
 */
 
 body
-  font-family: $fontPoppins;
+  font-family: $font;
   color: $colorText;
-  background: #0a0636;
+  background: #fff;
 
 
 .container
@@ -21,9 +21,6 @@ body
 
   &:hover
     opacity: 0.6;
-
-  &-underline
-    text-decoration: underline;
 
 
 .is-process
@@ -50,7 +47,7 @@ body
       margin-top: -16px;
       margin-left: -16px;
       border-width: 5px;
-      border-color: $colorAccentLight rgba(#fff,0);
+      border-color: #111827 #E5E7EB;
       border-style: solid;
       animation: process-rotate 1s ease-in-out infinite forwards;
       z-index: 15;
@@ -92,6 +89,12 @@ body
   img
     size(100%,100%);
     object-fit: cover;
+
+
+.ui-pic-contain
+  img
+    size(100%,100%);
+    object-fit: contain;
 
 
 .ui-tab
