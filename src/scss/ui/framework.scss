@@ -94,6 +94,22 @@
     width: auto;
   }
 
+  // Margins & Paddings
+  @each $one in 16, 24, 32, 64, 128 {
+    .ui-pt-#{$one}#{$prefix} {
+      padding-top: #{$one}px;
+    }
+    .ui-pb-#{$one}#{$prefix} {
+      padding-bottom: #{$one}px;
+    }
+    .ui-mt-#{$one}#{$prefix} {
+      margin-top: #{$one}px;
+    }
+    .ui-mb-#{$one}#{$prefix} {
+      margin-bottom: #{$one}px;
+    }
+  }
+
   // Margin
   @each $one in left, right {
     .ui-mx-auto-#{$one}#{$prefix} {
@@ -116,10 +132,24 @@
     margin-right: 0;
   }
 
+  .ui-mt-none#{$prefix} {
+    margin-top: initial;
+  }
+  .ui-mb-none#{$prefix} {
+    margin-bottom: initial;
+  }
+
   // Padding
   .ui-px-0#{$prefix} {
     padding-left: 0;
     padding-right: 0;
+  }
+
+  .ui-pt-none#{$prefix} {
+    padding-top: initial;
+  }
+  .ui-pb-none#{$prefix} {
+    padding-bottom: initial;
   }
 
   .ui-nowrap#{$prefix} {

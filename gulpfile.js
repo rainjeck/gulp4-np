@@ -1,4 +1,4 @@
-var cssExt = 'scss'; // 'styl' or 'scss'
+var cssExt = 'styl'; // 'styl' or 'scss'
 
 var gulp = require("gulp");
 var plugin = require("gulp-load-plugins")();

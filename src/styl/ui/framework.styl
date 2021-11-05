@@ -86,11 +86,22 @@ uidisplay($prefix = '')
     .ui-flexdir-{$one}{$prefix}
       flex-direction: $one;
 
-  // Margin
-  .ui-mx-auto{$prefix}
-    margin-left: auto;
-    margin-right: auto;
+  // Margins & Paddings
+  for $one in 16 24 32 64 128
+    .ui-pt-{$one}{$prefix}
+      padding-top: unit($one, 'px');
 
+    .ui-pb-{$one}{$prefix}
+      padding-bottom: unit($one, 'px');
+
+    .ui-mt-{$one}{$prefix}
+      margin-top: unit($one, 'px');
+
+    .ui-mb-{$one}{$prefix}
+      margin-bottom: unit($one, 'px');
+
+
+  // Margin
   .ui-mx-auto-left{$prefix}
     margin-left: auto;
     margin-right: initial;
@@ -98,6 +109,10 @@ uidisplay($prefix = '')
   .ui-mx-auto-right{$prefix}
     margin-left: initial;
     margin-right: left;
+
+  .ui-mx-auto{$prefix}
+    margin-left: auto;
+    margin-right: auto;
 
   .ui-mx-none{$prefix}
     margin-left: initial;
