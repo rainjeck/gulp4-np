@@ -146,31 +146,14 @@ gulp.task("css", gulp.series("css-app-bundle", "css-libs-bundle", "css-bundle"))
 
 
 // --- JS
-gulp.task("js-app", function () {
+gulp.task('js-app', function () {
   return gulp.src('./src/js/main.js')
-    .pipe(webpack({
-      mode: 'development',
-      output: {
-        filename: 'main.js',
-      },
-      devtool: 'source-map',
-      module: {
-        rules: [{
-          test: /\.js$/,
-          use: {
-            loader: 'babel-loader',
-            options: {
-              presets: [
-                ['@babel/preset-env', {
-                  useBuiltIns: 'entry',
-                  corejs: 3
-                }]
-              ]
-            }
-          }
-        }]
-      }
+    .pipe(plugin.sourcemaps.init())
+    .pipe(plugin.include()).on('error', console.log)
+    .pipe(plugin.babel({
+      presets: ['@babel/env']
     }))
+    .pipe(plugin.sourcemaps.write("../js"))
     .pipe(gulp.dest(destAssetsDir + "/js"))
 });
 

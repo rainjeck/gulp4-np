@@ -1,3 +1,9 @@
-import App from './modules/App.js';
+(function () {
+  //=require modules/app.js
+  //=require modules/form.js
 
-new App();
+  document.addEventListener('DOMContentLoaded', () => {
+    app.init();
+    form.init();
+  });
+}());

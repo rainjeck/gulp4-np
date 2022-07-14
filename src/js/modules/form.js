@@ -1,10 +1,25 @@
-class Form {
+const form = {
+  init() {
+    const _this = form;
+    _this.inputTel();
 
-  constructor() {
-    this.setup();
-    this.validation();
-    this.sending();
-  }
+    _this.setup(_this);
+    _this.validation();
+    _this.sending();
+  },
+
+  inputTel() {
+    const elems = document.querySelectorAll('.js-input-tel');
+
+    if (!elems.length) return;
+
+    elems.forEach(el => {
+      IMask(el, {
+        mask: '{0} (000) 000-00-00',
+        // lazy: false
+      });
+    });
+  },
 
   setup() {
     this.bouncerSettings = {
@@ -25,53 +40,67 @@ class Form {
       },
       disableSubmit: true
     }
-  }
+  },
 
   validation() {
-    if ( typeof Bouncer === 'undefined' ) return;
+    if (typeof Bouncer === 'undefined') return;
 
     window.AppBouncer = new Bouncer('[data-bouncer]', this.bouncerSettings);
 
     document.addEventListener('bouncerRemoveError', e => {
-      var field = e.target;
+      const field = e.target;
       field.classList.add('is-valid');
     }, false);
 
     document.addEventListener('bouncerShowError', e => {
-      var field = e.target;
+      const field = e.target;
       field.classList.remove('is-valid');
     }, false);
-  }
+  },
 
   sending() {
     document.addEventListener('bouncerFormValid', e => {
       const form = e.target;
       const type = form.dataset.type;
 
+      if (form.hasAttribute('method')) {
+        form.submit();
+        return;
+      }
+
       const btn = form.querySelector('[type="submit"]');
 
-      const url = 'yoururl';
+      const url = form.getAttribute('data-url');
 
       const fd = new FormData(form);
 
       form.classList.add('is-process');
       btn.setAttribute('disabled', true);
 
-      axios.post(url, fd).then((res) => {
-        console.log(res.data);
+      console.log('Do some magic');
 
-        if (res.data.success) {
-          form.classList.remove('is-process');
-          btn.removeAttribute('disabled');
-          form.reset();
+      // Demo Sending
+      setTimeout(() => {
+        form.classList.remove('is-process');
+        btn.removeAttribute('disabled');
+        form.reset();
+      }, 1000);
+      return;
 
-          // if (res.data.data.url) {
-          //   window.location.assign(res.data.data.url);
-          // }
+      fetch(url, {
+        method: 'POST',
+        body: fd
+      }).then(response => response.json()).then(res => {
+        console.log(res);
+
+        form.classList.remove('is-process');
+        btn.removeAttribute('disabled');
+        form.reset();
+
+        if (res.data.url) {
+          window.location.assign(res.data.url);
         }
       });
     }, false);
   }
 };
-
-export default Form;
