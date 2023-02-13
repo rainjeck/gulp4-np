@@ -1,5 +1,10 @@
 /*!
- --- GRID ---------------------
+  FRAMEWORK
+  ===============================================
+*/
+
+/*!
+  --- GRID ----------------------------
 */
 .ui-row
   display: flex;
@@ -38,7 +43,9 @@ for one, key in $points
     grid($gridColumns, $pointsPrefix[key])
 
 
-//! Display
+/*!
+  --- HELPER CLASSES ------------------
+*/
 uidisplay($prefix = '')
 
   // Flex
@@ -122,6 +129,11 @@ uidisplay($prefix = '')
     margin-left: 0;
     margin-right: 0;
 
+  // Padding
+  .ui-px-0{$prefix}
+    padding-left: 0;
+    padding-right: 0;
+
   // Width
   .ui-w-100{$prefix}
     width: 100%;
@@ -130,10 +142,12 @@ uidisplay($prefix = '')
     width: auto;
     max-width: none;
 
-  // Padding
-  .ui-px-0{$prefix}
-    padding-left: 0;
-    padding-right: 0;
+  // Height
+  .ui-h-100{$prefix}
+    height: 100%;
+
+  .ui-h-auto{$prefix}
+    height: auto;
 
 
 uidisplay()

@@ -1,22 +1,30 @@
 const form = {
   init() {
-    const _this = form;
-    _this.inputTel();
+    // this.inputTel();
 
-    _this.setup(_this);
-    _this.validation();
-    _this.sending();
+    this.setup();
+    this.validation();
+    this.sending();
   },
 
   inputTel() {
-    const elems = document.querySelectorAll('.js-input-tel');
+    // https://github.com/uNmAnNeR/imaskjs
+    const elems = document.querySelectorAll('.js-masked');
 
     if (!elems.length) return;
 
     elems.forEach(el => {
-      IMask(el, {
-        mask: '{0} (000) 000-00-00',
+      let mask = IMask(el, {
+        mask: el.dataset.mask
         // lazy: false
+      });
+
+      el.addEventListener('focus', e => {
+        mask.updateOptions({ lazy: false });
+      });
+
+      el.addEventListener('blur', e => {
+        mask.updateOptions({ lazy: true });
       });
     });
   },

@@ -1,12 +1,13 @@
 extends ../layout/_default
 
 block vars
-  - var title = 'Главная';
+  - var title = 'Навигатор';
   -
     var style = `
-      .nav-index { padding: 2em 0; }
+      .nav-index { padding: 2em 0; line-height: 1.4; }
       ul { margin: 2em 0; }
       ul li { margin-bottom: 0.3em; }
+      ul ul { margin: 0.5em 0; }
     `;
 
 block header
@@ -20,6 +21,6 @@ block content
         li: a.link(href="uikit.html") UI Kit
 
       ul
-        li: a.link(href="main.html") Main
+        li: a.link(href="main.html") Главная
 
 block footer

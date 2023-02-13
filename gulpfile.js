@@ -1,5 +1,3 @@
-var cssExt = 'styl'; // 'styl' or 'scss'
-
 var gulp = require("gulp");
 var plugin = require("gulp-load-plugins")();
 var browserSync = require("browser-sync").create();
@@ -7,10 +5,6 @@ var del = require("del");
 var webpack = require('webpack-stream');
 
 var destAssetsDir = "dest/assets";
-
-if (cssExt == 'scss') {
-  var sass = require('gulp-sass')(require('sass'));
-}
 
 // --- STATIC SERVER
 gulp.task("serve", function () {
@@ -37,57 +31,39 @@ gulp.task("pug", function () {
 });
 
 // --- INLINE SVG
-gulp.task("inlinesvg", function () {
-  return gulp.src('./dest/*.html')
-    .pipe(plugin.embedSvg({
-      selectors: ['svg[src$=".svg"]'],
-      root: './dest',
-      attrs: /class/
-    })).on("error", plugin.notify.onError("<%= error.message %>"))
-    .pipe(gulp.dest("dest"));
-});
+// gulp.task("inlinesvg", function () {
+//   return gulp.src('./dest/*.html')
+//     .pipe(plugin.embedSvg({
+//       selectors: ['svg[src$=".svg"]'],
+//       root: './dest',
+//       attrs: /class/
+//     })).on("error", plugin.notify.onError("<%= error.message %>"))
+//     .pipe(gulp.dest("dest"));
+// });
 
 
 // --- CSS
 gulp.task("css-app", function () {
-  if (cssExt == 'scss') {
-    return gulp.src(["src/" + cssExt + "/*." + cssExt])
-      .pipe(plugin.sourcemaps.init())
-      .pipe(sass({
-          outputStyle: 'expanded',
-          precision: 4
-        })
-        .on('error', plugin.notify.onError("<%= error.message %>"))
-      )
-      .pipe(plugin.autoprefixer({
-        remove: false,
-        cascade: false
-      }))
-      .pipe(plugin.sourcemaps.write("../css"))
-      .pipe(gulp.dest(destAssetsDir + "/css"))
-  }
-
-  if (cssExt == 'styl') {
-    return gulp.src(["src/" + cssExt + "/*." + cssExt])
-      .pipe(plugin.sourcemaps.init())
-      .pipe(plugin.stylus({
-          'include css': true
-        })
-        .on("error", plugin.notify.onError("<%= error.message %>"))
-      )
-      .pipe(plugin.autoprefixer({
-        remove: false,
-        cascade: false
-      }))
-      .pipe(plugin.sourcemaps.write("../css"))
-      .pipe(gulp.dest(destAssetsDir + "/css"))
-  }
+  return gulp.src(["src/stylus/*.styl"])
+    .pipe(plugin.sourcemaps.init())
+    .pipe(plugin.stylus({
+        'include css': true
+      })
+      .on("error", plugin.notify.onError("<%= error.message %>"))
+    )
+    .pipe(plugin.autoprefixer({
+      remove: false,
+      cascade: false
+    }))
+    .pipe(plugin.sourcemaps.write("../css"))
+    .pipe(gulp.dest(destAssetsDir + "/css"))
 });
 
 gulp.task("css-libs", function () {
-  if (cssExt == 'scss') {
-    return gulp.src(["src/" + cssExt + "/libs." + cssExt])
-    .pipe(sass()
+  return gulp.src(["src/stylus/libs.styl"])
+    .pipe(plugin.stylus({
+        'include css': true
+      })
       .on("error", plugin.notify.onError("<%= error.message %>"))
     )
     .pipe(plugin.autoprefixer({
@@ -99,25 +75,6 @@ gulp.task("css-libs", function () {
       suffix: '.min'
     }))
     .pipe(gulp.dest(destAssetsDir + "/css"))
-  }
-
-  if (cssExt == 'styl') {
-    return gulp.src(["src/" + cssExt + "/libs." + cssExt])
-      .pipe(plugin.stylus({
-          'include css': true
-        })
-        .on("error", plugin.notify.onError("<%= error.message %>"))
-      )
-      .pipe(plugin.autoprefixer({
-        remove: false,
-        cascade: false
-      }))
-      .pipe(plugin.cleanCss())
-      .pipe(plugin.rename({
-        suffix: '.min'
-      }))
-      .pipe(gulp.dest(destAssetsDir + "/css"))
-  }
 });
 
 gulp.task("css-minify", function () {
@@ -300,8 +257,8 @@ gulp.task("watch", function () {
   gulp.watch(["src/js/libs.js"], gulp.series("js-libs", "js-bundle", "watcher"));
 
   // CSS
-  gulp.watch(["src/**/*." + cssExt, "!src/styl/libs.scss"], gulp.series("css-app-bundle", "css-bundle", "watcher"));
-  gulp.watch(["src/styl/libs." + cssExt], gulp.series("css-libs-bundle", "css-bundle", "watcher"));
+  gulp.watch(["src/**/*.styl", "!src/styl/libs.styl"], gulp.series("css-app-bundle", "css-bundle", "watcher"));
+  gulp.watch(["src/styl/libs.styl"], gulp.series("css-libs-bundle", "css-bundle", "watcher"));
 });
 
 

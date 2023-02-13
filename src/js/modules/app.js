@@ -1,7 +1,5 @@
 const app = {
-  init: () => {
-    const _this = app;
-
+  init() {
     svg4everybody();
 
     console.log('It WORKS!');

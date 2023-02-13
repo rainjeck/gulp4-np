@@ -1,11 +1,11 @@
 /*!
- --- UI -----------------------------------------
+  UI
+  ===============================================
 */
 
 body
   font-family: $font;
   color: $colorText;
-  background: #fff;
 
 
 .container
@@ -62,6 +62,7 @@ body
 @import 'framework';
 
 
+
 /*!
   --- ELEMENTS BASIC ------------------
 */
@@ -97,6 +98,33 @@ body
     object-fit: contain;
 
 
+.ui-media-ratio-1,
+.ui-media-ratio-43,
+.ui-media-ratio-169
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+
+  img,
+  iframe
+    border: 0;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+
+.ui-media-ratio
+  &-1
+    padding-top: 100%;
+
+  &-169
+    padding-top: round((9 / 16) * 100%, 2);
+
+  &-43
+    padding-top: round((3 / 4) * 100%, 2);
+
+
 .ui-tab
   display: none;
   opacity: 0;
@@ -112,26 +140,44 @@ body
     opacity: 1;
 
 
-.ui-iframe-box
-  overflow: hidden;
-  padding-top: 56.25%;
-  position: relative;
-  width: 100%;
-
-  iframe
-    border: 0;
-    height: 100%;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 100%;
-
-
 .ui-ul-clear
   padding: 0;
   margin: 0;
   list-style-type: none;
 
+
+
+/*!
+  --- FORM ----------------------------
+*/
+.ui-fg
+  position: relative;
+
+  .error-message
+    position: absolute;
+    bottom: 3px;
+    right: 3px;
+    font-size: 0.8em;
+    color: $colorError;
+
+
+.ui-select
+  select
+    appearance: none;
+
+    &::-ms-expand
+      display: none;
+
+
+.ui-input
+  height: 1em;
+  border: 1px solid $colorText;
+
+
+
+/*!
+  --- ELEMENTS ------------------------
+*/
 
 .ui-burger
   size(32px,24px);
@@ -176,21 +222,3 @@ body
 
     &:after
       transform: rotate(-45deg);
-
-
-/*!
-  --- FORM ----------------------------
-*/
-.ui-fg
-  position: relative;
-  margin-bottom: 1em;
-
-  &.is-mb-0
-    margin-bottom: 0;
-
-  .error-message
-    position: absolute;
-    bottom: 3px;
-    right: 5px;
-    font-size: 0.8em;
-    color: $colorError;
