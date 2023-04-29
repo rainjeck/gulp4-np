@@ -23,7 +23,8 @@ gulp.task("pug", function () {
       "!src/pug/pages/_*/*.*"
     ])
     .pipe(plugin.pug({
-      pretty: true
+      pretty: true,
+      doctype: 'html'
     }))
     .on("error", plugin.notify.onError("<%= error.message %>"))
     // .pipe( plugin.notify({ onLast: true, message: "PUG done!" }) )
