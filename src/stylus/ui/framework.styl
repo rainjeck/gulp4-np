@@ -97,15 +97,21 @@ uidisplay($prefix = '')
   for $one in 0 8 16 24 32 64 128
     .ui-pt-{$one}{$prefix}
       padding-top: unit($one, 'px');
-
     .ui-pb-{$one}{$prefix}
       padding-bottom: unit($one, 'px');
+    .ui-pl-{$one}{$prefix}
+      padding-left: unit($one, 'px');
+    .ui-pr-{$one}{$prefix}
+      padding-right: unit($one, 'px');
 
     .ui-mt-{$one}{$prefix}
       margin-top: unit($one, 'px');
-
     .ui-mb-{$one}{$prefix}
       margin-bottom: unit($one, 'px');
+    .ui-mr-{$one}{$prefix}
+      margin-right: unit($one, 'px');
+    .ui-ml-{$one}{$prefix}
+      margin-left: unit($one, 'px');
 
 
   // Margin
@@ -148,6 +154,13 @@ uidisplay($prefix = '')
 
   .ui-h-auto{$prefix}
     height: auto;
+
+  // White Space
+  .ui-ws-nowrap{$prefix}
+    white-space: nowrap;
+
+  .ui-ws-normal{$prefix}
+    white-space: normal;
 
 
 uidisplay()

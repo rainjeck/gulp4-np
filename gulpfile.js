@@ -259,7 +259,7 @@ gulp.task("watch", function () {
 
   // CSS
   gulp.watch(["src/**/*.styl", "!src/styl/libs.styl"], gulp.series("css-app-bundle", "css-bundle", "watcher"));
-  gulp.watch(["src/styl/libs.styl"], gulp.series("css-libs-bundle", "css-bundle", "watcher"));
+  gulp.watch(["src/stylus/libs.styl"], gulp.series("css-libs-bundle", "css-bundle", "watcher"));
 });
 
 
